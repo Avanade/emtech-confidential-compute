@@ -15,11 +15,11 @@ VALUES
 
 INSERT INTO
     [dbo].[Document_Store](
-        DocumentStoreID int NOT NULL,
-        DocumentStoreName varchar(255),
-        DocumentDescription varchar(255),
-        IsActive BIT,
-        CreateDate DATETIME,
+        DocumentStoreID,
+        DocumentStoreName,
+        DocumentDescription,
+        IsActive,
+        CreateDate
     )
 VALUES
     (
