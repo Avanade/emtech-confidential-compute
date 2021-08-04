@@ -144,7 +144,7 @@ def add_document_bytes(doc_bytes):
     content = {"Document": str(doc_bytes)}
 
     document_id = str(uuid.uuid4())
-    append_cl(content, document_id, "document")
+    append_cl(content, document_id, "documents")
 
     return document_id
 
