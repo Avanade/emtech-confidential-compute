@@ -118,17 +118,17 @@ def new_document(blob):
     return document_id
 
 
-def search_entries_guid(search_guid):
-    """Returns a list of entries with the relavant guid"""
+def get_document(document_id):
+    """returns document data for maching document"""
     returns = []
 
     ledger_client = get_ledger_client()
-    entries = ledger_client.get_ledger_entries()
+    entries = read_all_of_type("documents")
 
     for entry in entries:
         try:
             json_read = json.loads(str(entry.contents))
-            if (json_read["Meta"]["guid"]) == search_guid:
+            if (json_read["Meta"]["guid"]) == document_id:
                 returns.append(entry.contents)
 
         except:
@@ -136,26 +136,6 @@ def search_entries_guid(search_guid):
             pass
 
     return returns[0]
-
-
-def search_entries_license(search_license):
-    """Returns a json of entries with the relavant licese"""
-    returns = {}
-
-    ledger_client = get_ledger_client()
-    entries = ledger_client.get_ledger_entries()
-
-    for entry in entries:
-        try:
-            json_read = json.loads(str(entry.contents))
-            if (json_read["Licence"]) == search_license:
-                returns.update(json_read)
-
-        except:
-            # not a valid json
-            pass
-
-    return returns
 
 
 def append_meta_data(content, guid):
