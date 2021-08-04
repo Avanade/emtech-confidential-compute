@@ -55,14 +55,20 @@ def get_ledger_client():
     return ledger_client
 
 
-def append_cl(data, guid):
+def append_cl(data, guid, sub_ledger=None):
 
     data = append_meta_data(json.loads(data), guid)
 
     ledger_client = get_ledger_client()
-    append_result = ledger_client.append_to_ledger(
-        entry_contents=str((json.dumps(data)))
-    )
+
+    if sub_ledger == None:
+        append_result = ledger_client.append_to_ledger(
+            entry_contents=str((json.dumps(data)))
+        )
+    else:
+        append_result = ledger_client.append_to_ledger(
+            entry_contents=str((json.dumps(data))), sub_ledger_id=sub_ledger
+        )
 
     return guid, append_result.transaction_id
 
@@ -74,6 +80,42 @@ def read_all():
         all.append([entry.contents, entry.transaction_id])
 
     return all
+
+
+def read_all_of_type(type):
+    """Read all from a sub ledger type"""
+    ledger_client = get_ledger_client()
+    all = []
+    for entry in ledger_client.get_ledger_entries(sub_ledger_id=type):
+        all.append([entry.contents, entry.transaction_id])
+
+    return all
+
+
+def read_all_notifications():
+    """Get a full list of notifications"""
+    return read_all_of_type("notifications")
+
+
+def read_all_documents():
+    """Get a full list of documents"""
+    return read_all_of_type("documents")
+
+
+def new_notification(content):
+    """Append new notification to the ledger"""
+    notifiction_id = str(uuid.uuid4())
+    append_cl(content, notifiction_id, "notification")
+
+    return notifiction_id
+
+
+def new_document(blob):
+    """Append a new document to the document ledger"""
+    document_id = str(uuid.uuid4())
+    append_cl(blob, document_id, "document")
+
+    return document_id
 
 
 def search_entries_guid(search_guid):
