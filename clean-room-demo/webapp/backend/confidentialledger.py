@@ -138,6 +138,17 @@ def get_document(document_id):
     return returns[0]
 
 
+def add_document_bytes(doc_bytes):
+    """Adds a new document to the CL from bytes srtring"""
+
+    content = {"Document": str(doc_bytes)}
+
+    document_id = str(uuid.uuid4())
+    append_cl(content, document_id, "document")
+
+    return document_id
+
+
 def append_meta_data(content, guid):
     """appends new guid and timestamp to given json"""
     timestamp = str(datetime.now())
