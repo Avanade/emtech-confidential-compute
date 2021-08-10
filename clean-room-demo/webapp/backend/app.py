@@ -27,8 +27,6 @@ import json
 
 import confidentialledger as cl
 
-templates = Jinja2Templates(directory="templates")
-
 config = Config(".env")
 DEBUG = config("DEBUG", cast=bool, default=False)
 
@@ -78,7 +76,7 @@ async def error_template(request, exc):  # scan:ignore
         error_message = error_codes[status_code]
     else:
         error_message = "Unknown error."
-    return templates.TemplateResponse(  # scan:ignore
+    return (  # scan:ignore
         "layout/error.html",
         {
             "request": request,
@@ -89,14 +87,8 @@ async def error_template(request, exc):  # scan:ignore
 
 
 routes = [
-    Route("/favicon.ico", FileResponse("static/favicon.ico")),
     Route("/notifications/get", get_notifications, methods=["GET", "POST"]),
     Route("/notifications/append", append_notification, methods=["GET", "POST"]),
-    Mount(
-        "/static",
-        app=StaticFiles(directory="static"),
-        name="static",
-    ),
 ]
 
 middleware = [
