@@ -51,7 +51,6 @@ async def append_notification(request):
     # append a new notification
 
     body_data = await request.body()
-    new_guid = uui
 
     # verify json
     try:
