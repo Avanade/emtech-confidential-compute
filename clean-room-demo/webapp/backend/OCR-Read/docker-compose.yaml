@@ -1,0 +1,27 @@
+version: "3"
+services:
+  azure-cognitive-service-receipt:
+    container_name: azure-cognitive-service-receipt
+    image: cognitiveservicespreview.azurecr.io/microsoft/cognitive-services-form-recognizer-receipt:2.1
+    environment:
+      - EULA=accept
+      - billing=https://emtech-cc-form-recognizer.cognitiveservices.azure.com/
+      - apikey=11dfe11ff78c4ad9a3e9810414f62f4f
+      - AzureCognitiveServiceReadHost=http://azure-cognitive-service-read:5000
+    ports:
+      - "5000:5050"
+    networks:
+      - ocrvnet
+  azure-cognitive-service-read:
+    container_name: azure-cognitive-service-read
+    image: mcr.microsoft.com/azure-cognitive-services/vision/read:3.2
+    environment:
+      - EULA=accept
+      - billing=https://emtech-cc-vision.cognitiveservices.azure.com/
+      - apikey=9fc6c106c710471ca9ac93da06ddc6fc
+    networks:
+      - ocrvnet
+
+networks:
+  ocrvnet:
+    driver: bridge

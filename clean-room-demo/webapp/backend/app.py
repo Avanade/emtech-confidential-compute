@@ -40,7 +40,7 @@ async def get_notifications(request):
         return JSONResponse({"Error": errorMessage})
 
     return_json = {}
-    return_json.update({"notifications": json.loads(latest_data)})
+    return_json.update({"notifications": (latest_data)})
 
     return JSONResponse(return_json)
 
@@ -58,6 +58,25 @@ async def append_notification(request):
 
     try:
         returndata = cl.new_notification(body_data)
+    except:
+        errorMessage = "The confidential data connection isn't working"
+        return JSONResponse({"Error": errorMessage})
+
+    return JSONResponse({"notification appended": returndata})
+
+
+async def new_document(request):
+    """take a document from the request body and send it to CL"""
+    body_data = await request.body()
+
+    # verify file
+    try:
+        data = body_data.decode()
+    except:
+        return JSONResponse({"error": "Body is not a valid json"})
+
+    try:
+        returndata = cl.new_document(body_data)
     except:
         errorMessage = "The confidential data connection isn't working"
         return JSONResponse({"Error": errorMessage})
@@ -89,6 +108,7 @@ async def error_template(request, exc):  # scan:ignore
 routes = [
     Route("/notifications/get", get_notifications, methods=["GET", "POST"]),
     Route("/notifications/append", append_notification, methods=["GET", "POST"]),
+    Route("/documents/new", new_document, methods=["GET", "POST"]),
 ]
 
 middleware = [
