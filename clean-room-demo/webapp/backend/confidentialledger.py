@@ -56,8 +56,14 @@ def get_ledger_client():
 
 
 def append_cl(data, guid, sub_ledger=None):
-
-    data = append_meta_data(json.loads(data), guid)
+    try:
+        # xisting json
+        data = append_meta_data(json.loads(data), guid)
+    except:
+        if sub_ledger != None:
+            data = append_meta_data({sub_ledger: data}, guid)
+        else:
+            data = append_meta_data({data: data}, guid)
 
     ledger_client = get_ledger_client()
 
@@ -94,12 +100,12 @@ def read_all_of_type(type):
 
 def read_all_notifications():
     """Get a full list of notifications"""
-    return read_all_of_type("notifications")
+    return read_all_of_type("notification")
 
 
 def read_all_documents():
     """Get a full list of documents"""
-    return read_all_of_type("documents")
+    return read_all_of_type("document")
 
 
 def new_notification(content):
@@ -158,3 +164,6 @@ def append_meta_data(content, guid):
     content.update(meta)
 
     return content
+
+
+read_all_of_type("notification")

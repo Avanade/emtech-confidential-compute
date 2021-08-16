@@ -40,7 +40,7 @@ async def get_notifications(request):
         return JSONResponse({"Error": errorMessage})
 
     return_json = {}
-    return_json.update({"notifications": json.loads(latest_data)})
+    return_json.update({"notifications": (latest_data)})
 
     return JSONResponse(return_json)
 
@@ -63,6 +63,38 @@ async def append_notification(request):
         return JSONResponse({"Error": errorMessage})
 
     return JSONResponse({"notification appended": returndata})
+
+
+async def new_document(request):
+    """take a document from the request body and send it to CL"""
+    body_data = await request.body()
+
+    # verify file
+    try:
+        data = body_data.decode()
+    except:
+        return JSONResponse({"error": "Body is not a valid json"})
+
+    try:
+        returndata = cl.add_document_bytes(body_data)
+    except:
+        errorMessage = "The confidential data connection isn't working"
+        return JSONResponse({"Error": errorMessage})
+
+    return JSONResponse({"notification appended": returndata})
+
+
+async def search_document(request):
+    doc_id = request.path_params["guid"]
+
+    try:
+        document = cl.get_document(doc_id)
+    except:
+        errorMessage = "The cdocument was not found"
+        return JSONResponse({"Error": errorMessage})
+
+    # TODO - what is the best way to return this?
+    return JSONResponse({"document bytes": document})
 
 
 async def error_template(request, exc):  # scan:ignore
@@ -89,6 +121,8 @@ async def error_template(request, exc):  # scan:ignore
 routes = [
     Route("/notifications/get", get_notifications, methods=["GET", "POST"]),
     Route("/notifications/append", append_notification, methods=["GET", "POST"]),
+    Route("/documents/new", new_document, methods=["GET", "POST"]),
+    Route("/documents/read/{id}", search_document, methods=["GET", "POST"]),
 ]
 
 middleware = [
