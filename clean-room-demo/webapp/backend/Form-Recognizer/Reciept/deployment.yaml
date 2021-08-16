@@ -23,9 +23,9 @@ spec:
         - name: EULA
           value: accept
         - name: billing
-          value: https://emtech-cc-form-recognizer.cognitiveservices.azure.com/
+          value: {FR_ENDPOINT}
         - name: apikey
-          value: 11dfe11ff78c4ad9a3e9810414f62f4f
+          value: {FR_KEY}
         resources:
           limits:
             sgx.intel.com/epc: 5Mi # This limit will automatically place the job into a confidential computing node and mount the required driver volumes. Alternatively, you can target deployment to node pools with node selector.
