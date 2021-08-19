@@ -116,14 +116,6 @@ def new_notification(content):
     return notifiction_id
 
 
-def new_document(blob):
-    """Append a new document to the document ledger"""
-    document_id = str(uuid.uuid4())
-    append_cl(blob, document_id, "document")
-
-    return document_id
-
-
 def get_document(document_id):
     """returns document data for maching document"""
     returns = []
@@ -164,6 +156,3 @@ def append_meta_data(content, guid):
     content.update(meta)
 
     return content
-
-
-read_all_of_type("notification")
