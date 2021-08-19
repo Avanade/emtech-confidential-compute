@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  azure-cognitive-service-layout:
+    container_name: azure-cognitive-service-layout
+    image: mcr.microsoft.com/azure-cognitive-services/form-recognizer/layout
+    environment:
+      - EULA=accept
+      - billing={FR_ENDPOINT}
+      - apikey={FR_KEY}
+
+    ports:
+      - "5000"
+    networks:
+      - ocrvnet
+networks:
+  ocrvnet:
+    driver: bridge
