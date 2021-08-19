@@ -24,11 +24,22 @@ import uvicorn
 from datetime import datetime, timedelta
 from urllib.parse import quote
 import json
+import sys
 
-import confidentialledger as cl
+sys.path.append("../notifications")
+import notifications
 
 config = Config(".env")
 DEBUG = config("DEBUG", cast=bool, default=False)
+
+
+def verify_json(test_json):
+
+    try:
+        json.loads(test_json)
+        return True
+    except:
+        return JSONResponse({"Error": "Not a valid Json"})
 
 
 async def get_notifications(request):
@@ -51,18 +62,12 @@ async def append_notification(request):
     body_data = await request.body()
 
     # verify json
-    try:
-        json.loads(body_data)
-    except:
-        return JSONResponse({"error": "Body is not a valid json"})
+    if verify_json(body_data) == True:
+        response = notifications.append(body_data)
+    else:
+        return JSONResponse({"Error": "Not a valid Json"})
 
-    try:
-        returndata = cl.new_notification(body_data)
-    except:
-        errorMessage = "The confidential data connection isn't working"
-        return JSONResponse({"Error": errorMessage})
-
-    return JSONResponse({"notification appended": returndata})
+    return JSONResponse(response)
 
 
 async def new_document(request):
