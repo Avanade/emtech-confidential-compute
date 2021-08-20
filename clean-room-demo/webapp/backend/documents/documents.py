@@ -15,3 +15,15 @@ def append(content):
         return {"Error": "The confidential data connection isn't working"}
 
     return {"document appended": id}
+
+
+def search(id):
+    """returns a json response with a document or error"""
+    try:
+        document = cl.get_document(id)
+    except:
+        errorMessage = "The document was not found"
+        return JSONResponse({"Error": errorMessage})
+
+    # TODO - what is the best way to return this?
+    return {"document bytes": document}
