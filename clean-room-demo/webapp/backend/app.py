@@ -27,10 +27,14 @@ import json
 import sys
 
 sys.path.append("../notifications")
+sys.path.append("../docuemnts")
 import notifications
+import documents
 
 config = Config(".env")
 DEBUG = config("DEBUG", cast=bool, default=False)
+
+ERRORS = {"json_error": {"error": "Body is not a valid json"}}
 
 
 def verify_json(test_json):
@@ -39,21 +43,13 @@ def verify_json(test_json):
         json.loads(test_json)
         return True
     except:
-        return JSONResponse({"Error": "Not a valid Json"})
+        return False
 
 
 async def get_notifications(request):
     # get all notifictions
-    try:
-        latest_data = cl.read_all_notifications()
-    except:
-        errorMessage = "The confidential data connection isn't working"
-        return JSONResponse({"Error": errorMessage})
-
-    return_json = {}
-    return_json.update({"notifications": (latest_data)})
-
-    return JSONResponse(return_json)
+    all_notifications = notifications.get_all()
+    return JSONResponse(all_notifications)
 
 
 async def append_notification(request):
@@ -65,7 +61,7 @@ async def append_notification(request):
     if verify_json(body_data) == True:
         response = notifications.append(body_data)
     else:
-        return JSONResponse({"Error": "Not a valid Json"})
+        return JSONResponse(ERRORS["json_error"])
 
     return JSONResponse(response)
 
@@ -75,18 +71,10 @@ async def new_document(request):
     body_data = await request.body()
 
     # verify file
-    try:
-        data = body_data.decode()
-    except:
-        return JSONResponse({"error": "Body is not a valid json"})
-
-    try:
-        returndata = cl.add_document_bytes(body_data)
-    except:
-        errorMessage = "The confidential data connection isn't working"
-        return JSONResponse({"Error": errorMessage})
-
-    return JSONResponse({"notification appended": returndata})
+    if verify_json(body_data) == True:
+        response = documents.append(body_data)
+    else:
+        return JSONResponse(ERRORS["json_error"])
 
 
 async def search_document(request):

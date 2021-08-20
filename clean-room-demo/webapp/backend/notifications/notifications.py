@@ -25,7 +25,4 @@ def get_all():
         errorMessage = "The confidential data connection isn't working"
         return {"Error": errorMessage}
 
-    return {"notifications": (latest_data)}
-
-
-print(cl.read_all_notifications())
+    return {"notifications": "latest_data"}
