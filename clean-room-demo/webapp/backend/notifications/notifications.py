@@ -1,13 +1,8 @@
 import sys
 
-sys.path.append("../../ledger")
-
+sys.path.append("clean-room-demo/webapp/backend/ledger")
 
 import os
-
-cwd = os.getcwd()
-
-print(cwd)
 
 import confidentialledger as cl
 
