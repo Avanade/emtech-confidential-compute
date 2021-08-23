@@ -26,6 +26,8 @@ spec:
           value: {FR_ENDPOINT}
         - name: apikey
           value: {FR_KEY}
+        - name: AzureCognitiveServiceReadHost
+          value: http://azure-cognitive-service-read:5000
         resources:
           limits:
             sgx.intel.com/epc: 5Mi # This limit will automatically place the job into a confidential computing node and mount the required driver volumes. Alternatively, you can target deployment to node pools with node selector.
