@@ -13,3 +13,4 @@ azure-confidentialledger==1.0.0b1
 azure-mgmt-confidentialledger==1.0.0b1
 azure-identity==1.6.0
 requests==2.26.0
+SQLAlchem==1.4.23
