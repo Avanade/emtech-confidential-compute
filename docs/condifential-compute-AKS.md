@@ -60,10 +60,24 @@ kube-system     sgx-device-plugin-xxxx     1/1     Running
 
 `N.B. If you have an issue connecting with kubectly, make sure you have run the az aks get-credentials command in the same environment that you are using for kubectl.`
 
-# Step 3 - Deploy containers
+# Setp 3 - Sconification
+
+TODO
+
+# Step 4 - Deploy containers
 
 The Microsoft tutorial can be used to deploy a simple hello world container.
 
 # Form Recognizer Reciept and Read contianer.
 
-To deploy the form recognizer reciept and read container together we will need a deployment yaml for the combination of containers required. This can be found TODO: link
+To deploy the form recognizer reciept and read container together we will need a deployment yaml for the combination of containers required.
+
+The docker compose files for Form Recognizer can be found [here](https://docs.microsoft.com/en-us/azure/applied-ai-services/form-recognizer/containers/form-recognizer-container-install-run?tabs=receipt).
+
+These can then be converted using [Kompose](https://kompose.io/).
+
+This has been done for you in the [Reciept](clean-room-demo/webapp/backend/aks-deployment/form-recognizer/Reciept) folder. You can then use:
+
+`kubectly apply -f .`
+
+from that directory to deploy the containers.
