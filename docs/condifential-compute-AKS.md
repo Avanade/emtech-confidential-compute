@@ -57,3 +57,13 @@ If deployment was successful you should see your sgx nodepool in teh returned li
 ```
 kube-system     sgx-device-plugin-xxxx     1/1     Running
 ```
+
+`N.B. If you have an issue connecting with kubectly, make sure you have run the az aks get-credentials command in the same environment that you are using for kubectl.`
+
+# Step 3 - Deploy containers
+
+The Microsoft tutorial can be used to deploy a simple hello world container.
+
+# Form Recognizer Reciept and Read contianer.
+
+To deploy the form recognizer reciept and read container together we will need a deployment yaml for the combination of containers required. This can be found TODO: link
