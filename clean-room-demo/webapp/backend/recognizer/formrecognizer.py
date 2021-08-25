@@ -1,19 +1,28 @@
 from dotenv import load_dotenv
 import os
 import requests
+import sys
+
+sys.path.append("clean-room-demo/webapp/backend/ledger")
 
 import confidentialledger as cl
 
+PATHS = {"receipt": "prebuilt/receipt", "layout": "layout"}
 
-def get_layout_url():
+
+def get_FR_url(service):
     load_dotenv()
+    if service == "layout":
+        url = os.getenv("FR_LAYOUT_URL")
+    elif service == "reciept":
+        url = os.getenv("FR_RECEIPT_URL")
 
-    return os.getenv("FR_LAYOUT_URL")
+    return url
 
 
-def test_layout_connection():
-    """returns true if the contianer is alive, false if not"""
-    url = get_layout_url()
+def test_connection(service):
+    """returns true if a given contianer is alive, false if not"""
+    url = get_FR_url(service)
     r = requests.get(f"http://{url}/ContainerLiveness")
 
     if r.status_code == 200:
@@ -22,20 +31,21 @@ def test_layout_connection():
         return False
 
 
-def layout_post(doc_Id):
-    """submits a document to FR layout and returns the operation Id"""
+def FR_post_document(service, doc_Id):
+    """submits a document to a FR service and returns the operation Id"""
     document = cl.get_document(doc_Id)
-    url = get_layout_url()
+    url = get_FR_url(service)
+    path = PATHS[service]
 
     headers = {
         # Request headers
-        "Content-Type": "application/png"
+        "Content-Type": "application/png"  # TODO: set type
     }
 
     body = document
 
     r = requests.post(
-        f"http://{url}/formrecognizer/v2.1/layout/analyze?%s",
+        f"http://{url}/formrecognizer/v2.1/{path}/analyze?%s",
         data=body,
         headers=headers,
     )
@@ -47,15 +57,16 @@ def layout_post(doc_Id):
         return op_id
 
     else:
-        return "Error submittign docuemnt to container"
+        return "Error submitting document to container"
 
 
-def layout_results(op_Id):
-    """retrieves the content from FR layout for a fiven operation Id"""
-    url = get_layout_url()
+def FR_get_results(service, op_Id):
+    """retrieves the content from FR for a given service and operation Id"""
+    url = get_FR_url(service)
+    path = PATHS[service]
 
     r = requests.get(
-        (f"http://{url}/formrecognizer/v2.1/layout/analyzeResults/{op_Id}")
+        (f"http://{url}/formrecognizer/v2.1/{path}/analyzeResults/{op_Id}")
     )
 
     return r.content
