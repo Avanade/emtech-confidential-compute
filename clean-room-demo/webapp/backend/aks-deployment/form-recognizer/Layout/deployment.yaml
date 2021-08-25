@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: recognizer-reciept
+  name: recognizer-layout
   labels:
-    app: recognizer-reciept-deployment
+    app: recognizer-layout-deployment
 spec:
   selector:
     matchLabels:
-      app: recognizer-reciept-app
+      app: recognizer-layout-app
   replicas: 1
   template:
     metadata:
       labels:
-        app: recognizer-reciept-app
+        app: recognizer-layout-app
     spec:
       containers:
-      - name: azure-cognitive-service-reciept
-        image: mcr.microsoft.com/azure-cognitive-services/form-recognizer/reciept
+      - name: azure-cognitive-service-layout
+        image: mcr.microsoft.com/azure-cognitive-services/form-recognizer/layout
         ports:
         - containerPort: 5000
         env:
@@ -26,6 +26,8 @@ spec:
           value: {FR_ENDPOINT}
         - name: apikey
           value: {FR_KEY}
+        - name: AzureCognitiveServiceReadHost
+          value: http://azure-cognitive-service-read:5000
         resources:
           limits:
             sgx.intel.com/epc: 5Mi # This limit will automatically place the job into a confidential computing node and mount the required driver volumes. Alternatively, you can target deployment to node pools with node selector.
@@ -40,11 +42,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: recognizer-reciept
+  name: recognizer-layout
 spec:
   type: LoadBalancer
   ports:
   - port: 5000
     targetPort: 5000
   selector:
-    app: recognizer-reciept-app
+    app: recognizer-layout-app

@@ -24,25 +24,32 @@ import uvicorn
 from datetime import datetime, timedelta
 from urllib.parse import quote
 import json
+import sys
 
-import confidentialledger as cl
+sys.path.append("../notifications")
+sys.path.append("../docuemnts")
+import notifications
+import documents
 
 config = Config(".env")
 DEBUG = config("DEBUG", cast=bool, default=False)
 
+ERRORS = {"json_error": {"error": "Body is not a valid json"}}
+
+
+def verify_json(test_json):
+
+    try:
+        json.loads(test_json)
+        return True
+    except:
+        return False
+
 
 async def get_notifications(request):
     # get all notifictions
-    try:
-        latest_data = cl.read_all_notifications()
-    except:
-        errorMessage = "The confidential data connection isn't working"
-        return JSONResponse({"Error": errorMessage})
-
-    return_json = {}
-    return_json.update({"notifications": (latest_data)})
-
-    return JSONResponse(return_json)
+    all_notifications = notifications.get_all()
+    return JSONResponse(all_notifications)
 
 
 async def append_notification(request):
@@ -51,18 +58,12 @@ async def append_notification(request):
     body_data = await request.body()
 
     # verify json
-    try:
-        json.loads(body_data)
-    except:
-        return JSONResponse({"error": "Body is not a valid json"})
+    if verify_json(body_data) == True:
+        response = notifications.append(body_data)
+    else:
+        return JSONResponse(ERRORS["json_error"])
 
-    try:
-        returndata = cl.new_notification(body_data)
-    except:
-        errorMessage = "The confidential data connection isn't working"
-        return JSONResponse({"Error": errorMessage})
-
-    return JSONResponse({"notification appended": returndata})
+    return JSONResponse(response)
 
 
 async def new_document(request):
@@ -70,31 +71,18 @@ async def new_document(request):
     body_data = await request.body()
 
     # verify file
-    try:
-        data = body_data.decode()
-    except:
-        return JSONResponse({"error": "Body is not a valid json"})
-
-    try:
-        returndata = cl.add_document_bytes(body_data)
-    except:
-        errorMessage = "The confidential data connection isn't working"
-        return JSONResponse({"Error": errorMessage})
-
-    return JSONResponse({"notification appended": returndata})
+    if verify_json(body_data) == True:
+        response = documents.append(body_data)
+    else:
+        return JSONResponse(ERRORS["json_error"])
 
 
 async def search_document(request):
     doc_id = request.path_params["guid"]
 
-    try:
-        document = cl.get_document(doc_id)
-    except:
-        errorMessage = "The cdocument was not found"
-        return JSONResponse({"Error": errorMessage})
+    document = documents.search(doc_id)
 
-    # TODO - what is the best way to return this?
-    return JSONResponse({"document bytes": document})
+    return JSONResponse(document)
 
 
 async def error_template(request, exc):  # scan:ignore
