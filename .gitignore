@@ -487,3 +487,4 @@ $RECYCLE.BIN/
 */networkcert.pem
 networkcert.pem
 .pyc
+.idea
