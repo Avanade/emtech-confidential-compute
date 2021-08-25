@@ -2,13 +2,15 @@ import requests
 import json
 from dotenv import load_dotenv
 import os
+import base64
+import io
 
 
 def get_face_key():
     """return face key and url"""
     load_dotenv()
     key = os.getenv("FACE_KEY")
-    url = os.geenc("FACE_URL")
+    url = os.getenv("FACE_URL")
 
     return url, key
 
@@ -40,6 +42,7 @@ def get_face_id(image_bytes):
 def validate_face_ids(id1, id2):
     """compare two face ids and return a verification bool and confidence score"""
 
+    url, key = get_face_key()
     body = {"faceId1": id1, "faceId2": id2}
 
     headers = {
@@ -67,7 +70,13 @@ def validate_face_bytes(bytes_1, bytes_2):
 
 def verify_from_json(json_data):
     """verify faces from teh request body and return the json with validation confidence"""
-    image_1_bytes = json_data["image1"]
-    image_2_bytes = json_data["image2"]
+
+    images = json.loads(json_data)
+
+    image_1_b64 = images["image1"]
+    image_2_b64 = images["image2"]
+
+    image_1_bytes = io.BytesIO(base64.b64decode(image_1_b64))
+    image_2_bytes = io.BytesIO(base64.b64decode(image_2_b64))
 
     return validate_face_bytes(image_1_bytes, image_2_bytes)

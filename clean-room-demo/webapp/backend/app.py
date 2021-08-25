@@ -31,7 +31,7 @@ sys.path.append("../documents")
 sys.path.append("../face")
 import notifications
 import documents
-import faceverification as face
+import face.faceverification as face
 
 config = Config(".env")
 DEBUG = config("DEBUG", cast=bool, default=False)
@@ -126,7 +126,7 @@ routes = [
     Route("/notifications/append", append_notification, methods=["GET", "POST"]),
     Route("/documents/new", new_document, methods=["GET", "POST"]),
     Route("/documents/read/{id}", search_document, methods=["GET", "POST"]),
-    Route("face/verify", verify_faces, methods=["POST"]),
+    Route("/face/verify", verify_faces, methods=["GET", "POST"]),
 ]
 
 middleware = [
