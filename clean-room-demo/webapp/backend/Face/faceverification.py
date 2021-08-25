@@ -57,9 +57,17 @@ def validate_face_ids(id1, id2):
     return r.text
 
 
-def validate_face_bytes(bytes1, bytes2):
+def validate_face_bytes(bytes_1, bytes_2):
 
-    id1 = get_face_id(bytes1)
-    id2 = get_face_id(bytes2)
+    id1 = get_face_id(bytes_1)
+    id2 = get_face_id(bytes_2)
 
     return validate_face_ids(id1, id2)
+
+
+def verify_from_json(json_data):
+    """verify faces from teh request body and return the json with validation confidence"""
+    image_1_bytes = json_data["image1"]
+    image_2_bytes = json_data["image2"]
+
+    return validate_face_bytes(image_1_bytes, image_2_bytes)
