@@ -32,6 +32,8 @@ spec:
               value: '{READ_KEY}'
           image: mcr.microsoft.com/azure-cognitive-services/vision/read:3.2
           name: azure-cognitive-service-read
-          resources: {}
+          resources:
+            limits:
+              sgx.intel.com/epc: 5Mi
       restartPolicy: Always
 status: {}

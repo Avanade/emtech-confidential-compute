@@ -80,14 +80,9 @@ async def new_document(request):
 async def search_document(request):
     doc_id = request.path_params["guid"]
 
-    try:
-        document = cl.get_document(doc_id)
-    except:
-        errorMessage = "The cdocument was not found"
-        return JSONResponse({"Error": errorMessage})
+    document = documents.search(doc_id)
 
-    # TODO - what is the best way to return this?
-    return JSONResponse({"document bytes": document})
+    return JSONResponse(document)
 
 
 async def error_template(request, exc):  # scan:ignore

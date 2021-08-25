@@ -38,6 +38,8 @@ spec:
           name: azure-cognitive-service-receipt
           ports:
             - containerPort: 5050
-          resources: {}
+          resources:
+            limits:
+              sgx.intel.com/epc: 5Mi
       restartPolicy: Always
 status: {}

@@ -9,6 +9,7 @@ metadata:
     io.kompose.service: azure-cognitive-service-receipt
   name: azure-cognitive-service-receipt
 spec:
+  type: LoadBalancer
   ports:
     - name: "5000"
       port: 5000
