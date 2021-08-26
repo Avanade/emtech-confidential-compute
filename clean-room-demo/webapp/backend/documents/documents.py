@@ -23,7 +23,7 @@ def search(id):
         document = cl.get_document(id)
     except:
         errorMessage = "The document was not found"
-        return JSONResponse({"Error": errorMessage})
+        return {"Error": errorMessage}
 
     # TODO - what is the best way to return this?
     return {"document bytes": document}

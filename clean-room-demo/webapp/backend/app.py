@@ -27,9 +27,11 @@ import json
 import sys
 
 sys.path.append("../notifications")
-sys.path.append("../docuemnts")
+sys.path.append("../documents")
+sys.path.append("../face")
 import notifications
 import documents
+import face.faceverification as face
 
 config = Config(".env")
 DEBUG = config("DEBUG", cast=bool, default=False)
@@ -85,6 +87,19 @@ async def search_document(request):
     return JSONResponse(document)
 
 
+async def verify_faces(request):
+    """json with two photos, verify faces are the same from the request body and send it to CL"""
+    body_data = await request.body()
+
+    # verify file
+    if verify_json(body_data) == True:
+        response = face.verify_from_json(body_data)
+    else:
+        return JSONResponse(ERRORS["json_error"])
+
+    return JSONResponse(response)
+
+
 async def error_template(request, exc):  # scan:ignore
     """Returns an error template."""
     error_codes = {
@@ -111,6 +126,7 @@ routes = [
     Route("/notifications/append", append_notification, methods=["GET", "POST"]),
     Route("/documents/new", new_document, methods=["GET", "POST"]),
     Route("/documents/read/{id}", search_document, methods=["GET", "POST"]),
+    Route("/face/verify", verify_faces, methods=["GET", "POST"]),
 ]
 
 middleware = [
