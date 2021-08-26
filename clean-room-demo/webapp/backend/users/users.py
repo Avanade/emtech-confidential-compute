@@ -1,57 +1,26 @@
-import os
-import sqlalchemy as sa
-from sqlalchemy import create_engine
-from dotenv import load_dotenv
-import urllib
+# space for user interations
+import sys
 
-import random
-from datetime import datetime
-import time
+sys.path.append("clean-room-demo/webapp/backend/sql")
+import sql.sqlinteractions as si
 
 
-def sqlEngine():
+def verify(id):
+    """verify a user id exists in the system"""
 
-    load_dotenv()  # take environment variables from .env.
+    print("called")
+    print("called")
+    print("called")
+    print("called")
+    print("called")
+    print("called")
+    print("called")
+    print("called")
+    print("called")
 
-    server = os.getenv("SERVER_NAME")
-    database = os.getenv("DB_NAME")
-    username = os.getenv("USERNAME")
-    password = os.getenv("PASSWORD")
-    port = os.getenv("PORT")
+    status = si.check_access(id)
 
-    driver = "{ODBC Driver 17 for SQL Server}"
-
-    odbc_str = (
-        "DRIVER="
-        + driver
-        + ";SERVER="
-        + server
-        + ";PORT="
-        + port
-        + ";UID="
-        + username
-        + ";DATABASE="
-        + database
-        + ";PWD="
-        + password
-    )
-    connect_str = "mssql+pyodbc:///?odbc_connect=" + urllib.parse.quote_plus(odbc_str)
-
-    engine = create_engine(connect_str)
-
-    return engine
-
-
-def getAll(table_name):
-
-    engine = sqlEngine()
-    conn = engine.connect()
-    metadata = sa.MetaData()
-    metadata.reflect(bind=engine)
-
-    table = metadata.tables[table_name]
-
-    s = table.select()
-    rs = conn.execute(s)
-
-    return rs
+    if status == True:
+        return {"verification status": "True"}
+    else:
+        return {"error": "user is not validated"}

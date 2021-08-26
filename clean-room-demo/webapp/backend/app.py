@@ -29,9 +29,11 @@ import sys
 sys.path.append("../notifications")
 sys.path.append("../documents")
 sys.path.append("../face")
+sys.path.append("../users")
 import notifications
 import documents
 import face.faceverification as face
+import users.users as users
 
 config = Config(".env")
 DEBUG = config("DEBUG", cast=bool, default=False)
@@ -80,7 +82,7 @@ async def new_document(request):
 
 
 async def search_document(request):
-    doc_id = request.path_params["guid"]
+    doc_id = request.path_params["id"]
 
     document = documents.search(doc_id)
 
@@ -98,6 +100,15 @@ async def verify_faces(request):
         return JSONResponse(ERRORS["json_error"])
 
     return JSONResponse(response)
+
+
+async def verify_user_id(request):
+    """check a user id exists currently in the autherised user base"""
+    user_id = request.path_params["id"]
+
+    status = users.verify(user_id)
+
+    return JSONResponse(status)
 
 
 async def error_template(request, exc):  # scan:ignore
@@ -127,6 +138,7 @@ routes = [
     Route("/documents/new", new_document, methods=["GET", "POST"]),
     Route("/documents/read/{id}", search_document, methods=["GET", "POST"]),
     Route("/face/verify", verify_faces, methods=["GET", "POST"]),
+    Route("/users/verify/{id}", verify_user_id, methods=["GET", "POST"]),
 ]
 
 middleware = [
