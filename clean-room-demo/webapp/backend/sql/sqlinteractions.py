@@ -62,6 +62,24 @@ def check_access(user_id):
         return False
 
 
+def check_doc_access(user_id, doc_id):
+    """check access of a specific user Id, return True or False"""
+    engine = sql_engine()
+    conn = engine.connect()
+    metadata = sa.MetaData()
+    metadata.reflect(bind=engine)
+    result = engine.execute(
+        f"SELECT * FROM [dbo].[Users] WHERE UserID = {user_id} AND DocumentStoreID = {doc_id}"
+    ).fetchall()
+
+    # TODO: check user status? Currently assume all access is equal - deleted if redacted
+
+    if result != []:
+        return True
+    else:
+        return False
+
+
 def new_document(id, name, description):
     """add document information to the document store"""
     engine = sql_engine()
