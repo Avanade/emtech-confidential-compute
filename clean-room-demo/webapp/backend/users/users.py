@@ -8,16 +8,6 @@ import sql.sqlinteractions as si
 def verify(id):
     """verify a user id exists in the system"""
 
-    print("called")
-    print("called")
-    print("called")
-    print("called")
-    print("called")
-    print("called")
-    print("called")
-    print("called")
-    print("called")
-
     status = si.check_access(id)
 
     if status == True:

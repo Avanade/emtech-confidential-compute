@@ -6,6 +6,7 @@ import urllib
 import random
 from datetime import datetime
 import time
+import uuid
 
 
 def sql_engine():
@@ -61,4 +62,20 @@ def check_access(user_id):
         return False
 
 
-print(check_access(1))
+def new_document(id, name, description):
+    """add document information to the document store"""
+    engine = sql_engine()
+    conn = engine.connect()
+    metadata = sa.MetaData()
+    metadata.reflect(bind=engine)
+
+    # datetime object containing current date and time
+    now = datetime.now()
+    # dd/mm/YY H:M:S
+    time_stamp = now.strftime("%Y-%m-%d %H:%M:%S")
+
+    result = engine.execute(
+        f"INSERT INTO table_name (DocumentStoreID, DocumentStoreName, DocumentDescription, IsActive,CreateDate)VALUES ({id},{name}, {description}), 1, {timestamp});"
+    ).fetchall()
+
+    return id
