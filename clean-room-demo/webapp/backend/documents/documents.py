@@ -1,22 +1,24 @@
 import sys
+import json
+
 sys.path.append("clean-room-demo/webapp/backend/ledger")
 sys.path.append("clean-room-demo/webapp/backend/sql")
 
 
 import os
 
-import confidentialledger as cl
+import ledger.confidentialledger as cl
 import sql.sqlinteractions as si
 
 
-def append(content,name='no-name',description=''):
+def append(content, name="no-name", description=""):
     """appends content to cl notifications, and returns a json"""
     try:
         id = cl.new_document(content)
     except:
         return {"Error": "The confidential data connection isn't working"}
 
-    si.new_document(id,name,description)
+    si.new_document(id, name, description)
 
     return {"document appended": id}
 
@@ -31,3 +33,15 @@ def search(id):
 
     # TODO - what is the best way to return this?
     return {"document bytes": document}
+
+
+def list():
+    """return json list of what is in the document store"""
+
+    try:
+        docs = si.list_documents()
+    except:
+        errorMessage = "The document store connection is not working"
+        return {"Error": errorMessage}
+
+    return {"documents": (str(docs))}

@@ -30,8 +30,8 @@ sys.path.append("../notifications")
 sys.path.append("../documents")
 sys.path.append("../face")
 sys.path.append("../users")
-import notifications
-import documents
+import notifications.notifications as notifications
+import documents.documents as documents
 import face.faceverification as face
 import users.users as users
 
@@ -111,6 +111,12 @@ async def verify_user_id(request):
     return JSONResponse(status)
 
 
+async def list_documents(request):
+    """List docuemnts in the store"""
+
+    return JSONResponse(documents.list())
+
+
 async def error_template(request, exc):  # scan:ignore
     """Returns an error template."""
     error_codes = {
@@ -137,6 +143,7 @@ routes = [
     Route("/notifications/append", append_notification, methods=["GET", "POST"]),
     Route("/documents/new", new_document, methods=["GET", "POST"]),
     Route("/documents/read/{id}", search_document, methods=["GET", "POST"]),
+    Route("/documents/list", list_documents, methods=["GET", "POST"]),
     Route("/face/verify", verify_faces, methods=["GET", "POST"]),
     Route("/users/verify/{id}", verify_user_id, methods=["GET", "POST"]),
 ]

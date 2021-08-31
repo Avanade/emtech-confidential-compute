@@ -4,7 +4,7 @@ sys.path.append("clean-room-demo/webapp/backend/ledger")
 
 import os
 
-import confidentialledger as cl
+import ledger.confidentialledger as cl
 
 
 def append(content):

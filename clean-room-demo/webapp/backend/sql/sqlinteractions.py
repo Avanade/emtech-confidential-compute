@@ -93,7 +93,24 @@ def new_document(id, name, description):
     time_stamp = now.strftime("%Y-%m-%d %H:%M:%S")
 
     result = engine.execute(
-        f"INSERT INTO table_name (DocumentStoreID, DocumentStoreName, DocumentDescription, IsActive,CreateDate)VALUES ({id},{name}, {description}), 1, {timestamp});"
+        f"INSERT INTO [dbo].[Document_Store] (DocumentStoreID, DocumentStoreName, DocumentDescription, IsActive,CreateDate) VALUES ({id},'{name}', '{description}', 1, {time_stamp});"
     ).fetchall()
 
     return id
+
+
+def list_documents():
+    """get a list of docuemnts in the store"""
+    engine = sql_engine()
+    conn = engine.connect()
+    metadata = sa.MetaData()
+    metadata.reflect(bind=engine)
+
+    # datetime object containing current date and time
+    now = datetime.now()
+    # dd/mm/YY H:M:S
+    time_stamp = now.strftime("%Y-%m-%d %H:%M:%S")
+
+    result = engine.execute(f"SELECT * FROM [dbo].[Document_Store]").fetchall()
+
+    return result
