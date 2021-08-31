@@ -117,6 +117,13 @@ async def list_documents(request):
     return JSONResponse(documents.list())
 
 
+async def list_documents_for_user(request):
+    """List docuemnts in the store for a given user"""
+    user_id = request.path_params["id"]
+
+    return JSONResponse(documents.list_verified(user_id))
+
+
 async def error_template(request, exc):  # scan:ignore
     """Returns an error template."""
     error_codes = {
@@ -144,6 +151,7 @@ routes = [
     Route("/documents/new", new_document, methods=["GET", "POST"]),
     Route("/documents/read/{id}", search_document, methods=["GET", "POST"]),
     Route("/documents/list", list_documents, methods=["GET", "POST"]),
+    Route("/documents/list/{id}", list_documents_for_user, methods=["GET", "POST"]),
     Route("/face/verify", verify_faces, methods=["GET", "POST"]),
     Route("/users/verify/{id}", verify_user_id, methods=["GET", "POST"]),
 ]

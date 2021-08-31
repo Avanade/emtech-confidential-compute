@@ -100,7 +100,7 @@ def new_document(id, name, description):
 
 
 def list_documents():
-    """get a list of docuemnts in the store"""
+    """get a list of documents in the store"""
     engine = sql_engine()
     conn = engine.connect()
     metadata = sa.MetaData()
@@ -112,5 +112,26 @@ def list_documents():
     time_stamp = now.strftime("%Y-%m-%d %H:%M:%S")
 
     result = engine.execute(f"SELECT * FROM [dbo].[Document_Store]").fetchall()
+
+    return result
+
+
+def list_documents_verified(user_id):
+    """get a list of documents the user is verified to see"""
+
+    engine = sql_engine()
+    conn = engine.connect()
+    metadata = sa.MetaData()
+    metadata.reflect(bind=engine)
+
+    # datetime object containing current date and time
+    now = datetime.now()
+    # dd/mm/YY H:M:S
+    time_stamp = now.strftime("%Y-%m-%d %H:%M:%S")
+
+    # TODO - add verification against  table Document_Store_Acess
+    result = engine.execute(
+        f"SELECT A.* FROM [dbo].[Document_Store] A INNER JOIN [dbo].[Document_Store_Acess] B on A.DocumentStoreID = B.DocumentStoreID WHERE B.UserId = '{user_id}'"
+    ).fetchall()
 
     return result
