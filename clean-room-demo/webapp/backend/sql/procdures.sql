@@ -59,3 +59,13 @@ VALUES
 UPDATE [dbo].[Document_Store]
 SET IsActive = 0
 WHERE DocumentStoreID = *Input DocID*;
+
+--- get autherise docs from auserID
+
+select
+  A.*
+from
+  [dbo].[Document_Store] A
+  inner join [dbo].[Document_Store_Acess] B on A.DocumentStoreID = B.DocumentStoreID
+where
+  B.UserId = * Search User ID * -- insert User Id
