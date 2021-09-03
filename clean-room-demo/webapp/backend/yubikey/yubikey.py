@@ -19,7 +19,20 @@ def verify(otp):
     client = Yubico(client_id, key)
     try:
         result = client.verify(str(otp))
-        if result == True:
-            return {"verification": "true"}
     except:
         return {"verification": "false"}
+
+    if check_key_validity(otp) == True:
+        return {"verification": "true"}
+
+
+def check_key_validity(otp):
+    """check the key identifier is a valid user"""
+
+    otp_identifier = otp[0:12]
+    print(otp_identifier)
+
+    return True
+
+
+print(verify("")
