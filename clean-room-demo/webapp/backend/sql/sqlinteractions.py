@@ -124,14 +124,59 @@ def list_documents_verified(user_id):
     metadata = sa.MetaData()
     metadata.reflect(bind=engine)
 
+    result = engine.execute(
+        f"SELECT A.* FROM [dbo].[Document_Store] A INNER JOIN [dbo].[Document_Store_Acess] B on A.DocumentStoreID = B.DocumentStoreID WHERE B.UserId = '{user_id}'"
+    ).fetchall()
+
+    return result
+
+
+def new_annotation(doc_id, user_id, content):
+    """add annotation"""
+
+    id = str(uuid.uuid4())
+
+    engine = sql_engine()
+    conn = engine.connect()
+    metadata = sa.MetaData()
+    metadata.reflect(bind=engine)
+
     # datetime object containing current date and time
     now = datetime.now()
     # dd/mm/YY H:M:S
     time_stamp = now.strftime("%Y-%m-%d %H:%M:%S")
 
-    # TODO - add verification against  table Document_Store_Acess
     result = engine.execute(
-        f"SELECT A.* FROM [dbo].[Document_Store] A INNER JOIN [dbo].[Document_Store_Acess] B on A.DocumentStoreID = B.DocumentStoreID WHERE B.UserId = '{user_id}'"
+        f"INSERT INTO [dbo].[Annotations] (AnnotationID, DocumentID, Contents, CreateDate,CreatedByUserID) VALUES ({id},{doc_id}, '{content}', {time_stamp}, {user_id});"
+    ).fetchall()
+
+    return id
+
+
+def get_annotation(doc_id):
+    """Get all annotations for a doc_id"""
+
+    engine = sql_engine()
+    conn = engine.connect()
+    metadata = sa.MetaData()
+    metadata.reflect(bind=engine)
+
+    result = engine.execute(
+        f"SELECT * FROM [dbo].[Annotations] WHERE DocumentID = {doc_id};"
+    ).fetchall()
+
+    return result
+
+
+def get_named_annotation(annotation_id):
+    """Get a named annotation by annotation ID"""
+    engine = sql_engine()
+    conn = engine.connect()
+    metadata = sa.MetaData()
+    metadata.reflect(bind=engine)
+
+    result = engine.execute(
+        f"SELECT * FROM [dbo].[Annotations] WHERE AnnotationID = {annotation_id};"
     ).fetchall()
 
     return result

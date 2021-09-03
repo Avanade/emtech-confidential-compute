@@ -45,3 +45,15 @@ def list():
         return {"Error": errorMessage}
 
     return {"documents": (str(docs))}
+
+
+def list_verified(user_id):
+    """return json of what is in the document store that the user is autherised to see"""
+
+    try:
+        docs = si.list_documents_verified(user_id)
+    except:
+        errorMessage = "The document store connection is not working"
+        return {"Error": errorMessage}
+
+    return {"documents": (str(docs))}

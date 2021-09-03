@@ -27,10 +27,12 @@ import json
 import sys
 
 sys.path.append("../notifications")
+sys.path.append("../annotations")
 sys.path.append("../documents")
 sys.path.append("../face")
 sys.path.append("../users")
 import notifications.notifications as notifications
+import annotations.annotations as an
 import documents.documents as documents
 import face.faceverification as face
 import users.users as users
@@ -124,6 +126,39 @@ async def list_documents_for_user(request):
     return JSONResponse(documents.list_verified(user_id))
 
 
+async def list_annotations_for_doc(request):
+    """list annotations for a given document"""
+    doc_id = request.path_params["id"]
+
+    list = an.list_annotations(doc_id)
+
+    return JSONResponse(list)
+
+
+async def new_annotation(request):
+    """add a new annotation to a given doc id"""
+    doc_id = request.path_params["id"]
+
+    # json: {'User':[userId],"Content":[any content for the annotation]}
+    body_data = await request.body()
+
+    # verify file
+    if verify_json(body_data) == True:
+        response = id = an.new_annotation(doc_id, body_data)
+    else:
+        return JSONResponse(ERRORS["json_error"])
+
+
+async def get_annotation(request):
+    """get a specific annotation by its ID"""
+
+    annotation_id = request.path_params["id"]
+
+    annotation = an.get_annotation(annotation_id)
+
+    return JSONResponse(annotation)
+
+
 async def error_template(request, exc):  # scan:ignore
     """Returns an error template."""
     error_codes = {
@@ -154,6 +189,9 @@ routes = [
     Route("/documents/list/{id}", list_documents_for_user, methods=["GET", "POST"]),
     Route("/face/verify", verify_faces, methods=["GET", "POST"]),
     Route("/users/verify/{id}", verify_user_id, methods=["GET", "POST"]),
+    Route("/annotation/new/{id}", new_annotation, methods=["GET", "POST"]),
+    Route("/annotation/list/{id}", list_annotations_for_doc, methods=["GET", "POST"]),
+    Route("/annotation/get/{id}", get_annotation, methods=["GET", "POST"]),
 ]
 
 middleware = [
