@@ -180,3 +180,29 @@ def get_named_annotation(annotation_id):
     ).fetchall()
 
     return result
+
+
+def get_user_from_yubi(key):
+    """Get a named annotation by annotation ID"""
+    engine = sql_engine()
+    conn = engine.connect()
+    metadata = sa.MetaData()
+    metadata.reflect(bind=engine)
+
+    result = engine.execute(
+        f"SELECT * FROM [dbo].[Users] WHERE YubiKey = '{key}';"
+    ).fetchall()
+
+
+def validate_user_from_yubi(user_mail, key):
+    """Get a named annotation by annotation ID"""
+    engine = sql_engine()
+    conn = engine.connect()
+    metadata = sa.MetaData()
+    metadata.reflect(bind=engine)
+
+    result = engine.execute(
+        f"SELECT * FROM [dbo].[Users] WHERE YubiKey = '{key}' and UserEmail - '{user_mail}';"
+    ).fetchall()
+
+    return result
