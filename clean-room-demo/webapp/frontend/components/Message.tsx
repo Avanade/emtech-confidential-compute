@@ -1,25 +1,50 @@
 import { NextPage } from "next"
 import Loading from './Loading'
+import {CheckCircleIcon,XCircleIcon,InformationCircleIcon} from '@heroicons/react/outline'
+import { Switch } from "@headlessui/react"
 
-
-const Message: NextPage<{ message1: string, message2: string, loading?: boolean }> = (context) => {
-    const { message1, message2 } = context
-
+const Message: NextPage<{ message1: string, message2: string, type: string }> = (context) => {
+    const { message1, message2  } = context
+    let returnmsg:any
+        switch (context.type) {
+            case    'info':
+                            returnmsg= <div className="flex place-content-center">
+                                            <InformationCircleIcon  height={75} width={75} color="Red"  />
+                                        </div>
+                            break;
+            case 'success':
+                            returnmsg=<div className="flex place-content-center"><CheckCircleIcon height={75} width={75} color="Green"/>  </div>
+                            break;
+            case 'loading':
+                            returnmsg= <Loading />
+                            break;
+            default:
+                            returnmsg=
+                            <div className="flex place-content-center">
+                            <XCircleIcon  height={75} width={75} color="Red"  />
+                            </div>
+                            break;
+        }
     return (
         <>
-            {context.loading ? <Loading /> :
-                <div  >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="GREEN"  >
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-            }
-          
-            <div className="flex place-content-center text-blue-800 text-4xl pb-0  pt-14">{message1}</div>
-
-            <div className="flex place-content-center text-sm pt-14"   >{message2}</div>
+        <div className="flex  flex-col">
+            <div className="basis-1/2">
+               { returnmsg
+                
+                }
+           
+             </div>
+            <div className="flex place-content-center text-blue-800 text-xl basis-1/4 pt-8">{message1}</div>
+      
+            <div className="flex place-content-center text-sm  basis-1/4 pt-10"   >{message2}</div>
+ 
+        </div>
         </>
     )
 }
 
 export default Message
+
+function type(type: any): import("react").ReactNode {
+    throw new Error("Function not implemented.")
+}
