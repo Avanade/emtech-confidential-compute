@@ -1,7 +1,7 @@
 import LoginPage from "@/components/LoginLayout";
 // import { LoginIcon } from "@heroicons/react/outline";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Textbox from '../components/Textbox'
 import Button from '../components/Button'
 import {UserIcon, KeyIcon} from '@heroicons/react/outline'
@@ -10,6 +10,8 @@ import Message from '../components/Message'
 export default function Login() {
   // let step = 1
   const [step, setStep] = useState(1)
+  const [main, setMain] = useState(<></>)
+  const [bottom, setBottom] = useState(<></>)
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
@@ -18,7 +20,7 @@ export default function Login() {
   // }
 
   const start = () => {
-    let Main = (
+    setMain(
       <>
         <div className="text-secondary font-semibold">Log In</div>
         <p className="text-xs">Use your corporate Username and generate your YubiKey to log in</p>
@@ -28,51 +30,50 @@ export default function Login() {
         </div>
       </>
     )
-    let Bottom = (
-      <Button onClick={() => setStep(2)}>Login</Button>
+    setBottom(
+      <Button onClick={() => validate()}>Login</Button>
     )
-    // console.log('rendering start')
-    return <LoginPage Step={1} Main={Main} Bottom={Bottom}></LoginPage>
   }
 
-  const validating = () => {
-    let Main = (
+  const validate = () => {
+    setMain(
       // <div>validating</div>
         <Message message1="Please wait" message2="Validation in progress..." loading={true}></Message>
     )
-    let Bottom = (
-      <Button onClick={() => setStep(3)}>Next Step</Button>
+    setBottom(
+      <Button onClick={() => success()}>Next Step</Button>
     )
-    // console.log('rendering validating')
-    return <LoginPage Step={2} Main={Main} Bottom={Bottom}></LoginPage>
   }
 
-  const nextStep = () =>{
-    let Main = (
+  const success = () => {
+    setMain(
       <>
         <Message message1="Your key has been verified!" message2="Successfuly Logged in"></Message>
       </>
     )
-    let Bottom = (
-      <Button onClick={() => setStep(1)}>Next Step</Button>
-    )
-    // console.log('rendering next step')
-    return <LoginPage Step={3} Main={Main} Bottom={Bottom}></LoginPage>
+    setBottom(
+      <Button onClick={() => nextStep()}>Next Step</Button>
+    ) 
   }
 
-  const load = () => {
-    switch (step) {
-      case 1:
-        return start()
-      case 2:
-        return validating()
-      case 3:
-        return nextStep()
-    }
+  const nextStep = () =>{
+    setMain(
+      <>
+        Scan your corporate badge <br />
+        Scanning in progress... <br />
+      </>
+    )
+    setBottom(
+     <><Button onClick={() => start()}>Back to start (for now)</Button></>
+    ) 
   }
+
+  useEffect(()=>{
+    start()
+  },[])
   return (
     <>
-      {load()}
+      <LoginPage Step={3} Main={main} Bottom={bottom}></LoginPage>
     </>
   )
 
