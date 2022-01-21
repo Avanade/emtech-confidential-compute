@@ -60,11 +60,19 @@ export default function Login() {
     return <LoginPage Step={3} Main={Main} Bottom={Bottom}></LoginPage>
   }
 
+  const load = () => {
+    switch (step) {
+      case 1:
+        return start()
+      case 2:
+        return validating()
+      case 3:
+        return nextStep()
+    }
+  }
   return (
     <>
-      <div className={step==1 ? 'block' : 'hidden'}>{start()}</div>
-      <div className={step==2 ? 'block' : 'hidden'}>{validating()}</div>
-      <div className={step==3 ? 'block' : 'hidden'}>{nextStep()}</div>
+      {load()}
     </>
   )
 
