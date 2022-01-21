@@ -42,7 +42,7 @@ export default function Login() {
   const validate = () => {
     setMain(
       // <div>validating</div>
-        <Message message1="Please wait" message2="Validation in progress..." type="loading"  ></Message>
+        <Message caption="Please wait" subtext="Validation in progress..." type="loading"  ></Message>
     )
     setBottom(
       <Button onClick={() => success()}>Next Step</Button>
@@ -52,7 +52,7 @@ export default function Login() {
   const success = () => {
     setMain(
       <>
-        <Message message1="Your key has been verified!" message2="Successfuly Logged in" type="success"></Message>
+        <Message caption="Your key has been verified!" subtext="Successfuly Logged in" type="success"></Message>
       </>
     )
     setBottom(
