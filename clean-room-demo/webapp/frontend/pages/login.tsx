@@ -13,6 +13,10 @@ export default function Login() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
+  //If value is true textbox border and text will appear color red
+  const [usernameIsInvalid, setUsernameIsInvalid] = useState(false)
+  const [passwordIsInvalid, setPasswordIsInvalid] = useState(false)
+
   // const setStep = (n) => {
   //   step = n
   // }
@@ -23,8 +27,8 @@ export default function Login() {
         <div className="text-secondary font-semibold">Log In</div>
         <p className="text-xs">Use your corporate Username and generate your YubiKey to log in</p>
         <div className="mt-5">
-          <Textbox value={username} id="Username" name="Username" type="text" onChange={(value:string) => setUsername(value)} preicon={UserIcon}/>
-          <Textbox value={password} id="Password" name="Password" type="password" onChange={(value:string) => setPassword(value)} preicon={KeyIcon}/>
+          <Textbox value={username} id="Username" invalid={usernameIsInvalid} name="Username" type="text" onChange={(value:string) => setUsername(value)} preicon={UserIcon}/>
+          <Textbox value={password} id="Password" invalid={passwordIsInvalid} name="Password" type="password" onChange={(value:string) => setPassword(value)} preicon={KeyIcon}/>
         </div>
       </>
     )
