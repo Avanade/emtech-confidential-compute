@@ -6,6 +6,7 @@ import Textbox from '../components/Textbox'
 import Button from '../components/Button'
 import {UserIcon, KeyIcon} from '@heroicons/react/outline'
 import Message from '../components/Message'
+import Camera from '../components/Camera'
 
 export default function Login() {
   // let step = 1
@@ -87,10 +88,10 @@ export default function Login() {
         <LoginPage>
           <LoginPage.Step>3</LoginPage.Step>
           <LoginPage.Main>
-            <div className="text-secondary font-semibold">Log In</div>
-            <p className="text-xs">Scan your corporate badge <br />Scanning in progress... <br /></p>
+            <div className="text-secondary font-semibold">Scan your corporate badge</div>
+            <p className="text-xs">Scanning in progress...</p>
             <div className="mt-5">
-              ... load camera ...
+              <Camera></Camera>
             </div>
           </LoginPage.Main>
           <LoginPage.Bottom><Button onClick={() => start()}>Back to start</Button></LoginPage.Bottom>

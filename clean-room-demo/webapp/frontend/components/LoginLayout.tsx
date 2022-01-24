@@ -10,7 +10,10 @@ class LoginPage extends Component {
     render(){
         let imgSrc = '/assets/insert 1.png'
         let msg = 'Please Insert your YubiKey and touch it\n to generate unique password!'
-
+        if(this.props.children[0].props.children==3){
+            imgSrc = '/assets/id 1.png'
+            msg = 'Please hold up your badge in front of the webcam to scan!'
+        }
         return (
             <div className="flex place-content-center">
                 <div className="w-3/5">
