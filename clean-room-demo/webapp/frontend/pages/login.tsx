@@ -20,6 +20,7 @@ export default function Login() {
 
   const start = () => {
     setStep(1)
+    setUsername('')
     // Update code for actual procedure
   }
   const validate = () => {
@@ -30,8 +31,12 @@ export default function Login() {
     setStep(3)
     // Update code for actual procedure
   }
-  const nextStep = () => {
+  const scan = () => {
     setStep(4)
+    // Update code for actual procedure
+  }
+  const scanSuccessful = () => {
+    setStep(5)
     // Update code for actual procedure
   }
 
@@ -48,7 +53,7 @@ export default function Login() {
               <Textbox value={password} id="Password" invalid={passwordIsInvalid} name="Password" type="password" onChange={(value:string) => setPassword(value)} preicon={KeyIcon}/>
             </div>
           </LoginPage.Main>
-          <LoginPage.Bottom><Button onClick={() => validate()}>Login</Button></LoginPage.Bottom>
+          <LoginPage.Bottom><Button onClick={() => validate()} disabled={username ? false : true}>Login</Button></LoginPage.Bottom>
         </LoginPage>
       </>
     )
@@ -76,13 +81,27 @@ export default function Login() {
           <LoginPage.Main>
           <Message caption="Your key has been verified!" subtext="Successfuly Logged in" type="success"></Message>
           </LoginPage.Main>
-          <LoginPage.Bottom><Button onClick={() => nextStep()}>Next Step</Button></LoginPage.Bottom>
+          <LoginPage.Bottom><Button onClick={() => scan()}>Next Step</Button></LoginPage.Bottom>
         </LoginPage>
       </>
     )
   }
 
-  const nextStepView = () =>{
+  const scanSuccessfulView = (name:string) => {
+    return (
+      <>
+        <LoginPage>
+          <LoginPage.Step>2</LoginPage.Step>
+          <LoginPage.Main>
+          <Message caption={`Welcome ${name}!`} subtext="Scanning Completed" type="success"></Message>
+          </LoginPage.Main>
+          <LoginPage.Bottom><Button onClick={() => start()}>Start Again</Button></LoginPage.Bottom>
+        </LoginPage>
+      </>
+    )
+  }
+
+  const scanView = () =>{
     return (
       <>
         <LoginPage>
@@ -94,7 +113,7 @@ export default function Login() {
               <Camera></Camera>
             </div>
           </LoginPage.Main>
-          <LoginPage.Bottom><Button onClick={() => start()}>Back to start</Button></LoginPage.Bottom>
+          <LoginPage.Bottom><Button onClick={() => scanSuccessful()}>Back to start</Button></LoginPage.Bottom>
         </LoginPage>
       </>
     )
@@ -103,7 +122,8 @@ export default function Login() {
     switch (step){ 
       case 2: return validateView()
       case 3: return successView()
-      case 4: return nextStepView()
+      case 4: return scanView()
+      case 5: return scanSuccessfulView(username)
       default: return startView()
     }
   }
