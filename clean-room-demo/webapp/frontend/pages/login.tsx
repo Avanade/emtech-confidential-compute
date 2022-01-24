@@ -1,4 +1,4 @@
-import LoginPage from "@/components/LoginLayout";
+import LoginPage from "@/components/LoginLayoutResponsive";
 // import { LoginIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useState, useEffect } from "react";
