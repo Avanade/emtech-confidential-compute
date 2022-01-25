@@ -1,5 +1,5 @@
 import { NextPage } from "next"
-import CommentItem, {IComment} from "../components/CommentItem"
+import CommentItem, {IComment} from "./CommentItem"
 import {DotsHorizontalIcon} from "@heroicons/react/outline"
 import Textbox from "@/components/Textbox"
 import { useState } from "react"
