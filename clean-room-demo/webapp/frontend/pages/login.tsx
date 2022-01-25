@@ -1,4 +1,4 @@
-import LoginPage from "@/components/LoginLayoutResponsive";
+import LoginPage from "@/components/LoginLayout";
 // import { LoginIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -40,6 +40,11 @@ export default function Login() {
     // Update code for actual procedure
   }
 
+  const getImage = (v) => {
+    // Image in base64
+    console.log(v)
+  }
+
   const startView = () => {
     return (
       <>
@@ -48,7 +53,7 @@ export default function Login() {
           <LoginPage.Main>
             <div className="text-secondary font-semibold">Log In</div>
             <p className="text-xs">Use your corporate Username and generate your YubiKey to log in</p>
-            <div className="mt-5">
+            <div className="mt-5 md:mt-10">
               <Textbox value={username} id="Username" invalid={usernameIsInvalid} name="Username" type="text" onChange={(value:string) => setUsername(value)} preicon={UserIcon}/>
               <Textbox value={password} id="Password" invalid={passwordIsInvalid} name="Password" type="password" onChange={(value:string) => setPassword(value)} preicon={KeyIcon}/>
             </div>
@@ -109,11 +114,11 @@ export default function Login() {
           <LoginPage.Main>
             <div className="text-secondary font-semibold">Scan your corporate badge</div>
             <p className="text-xs">Scanning in progress...</p>
-            <div className="mt-5">
-              <Camera></Camera>
+            <div className="m-5">
+              <Camera onCapture={getImage}></Camera>
             </div>
           </LoginPage.Main>
-          <LoginPage.Bottom><Button onClick={() => scanSuccessful()}>Back to start</Button></LoginPage.Bottom>
+          <LoginPage.Bottom><Button onClick={() => scanSuccessful() }>Back to start</Button></LoginPage.Bottom>
         </LoginPage>
       </>
     )

@@ -9,7 +9,10 @@ module.exports = {
         'darkblue': '#00365C',
         'lightblue': '#4BBBEB',
         'lightpink': '#FCE7F3'
-      }
+      },
+      screens: {
+        'xs': '280px',
+      },
     },
   },
   variants: {
