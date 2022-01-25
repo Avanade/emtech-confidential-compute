@@ -1,16 +1,20 @@
 import { NextPage } from "next";
 
-const Button:NextPage<{onClick?:any, disabled?:boolean, small?:boolean}> = (context, ) =>{
+const Button:NextPage<{onClick?:any, disabled?:boolean, small?:boolean, textLayout?:boolean, className?:string}> = (context, ) =>{
     let text = context.children ? context.children : 'Button'
     let disabled = context.disabled || false
     let small = context.small || false
+    let textLayout = context.textLayout || false
+
     return (
         <button onClick={context.onClick}
             className={`${!small ? 'px-4 py-2 font-medium' : 'px-2 py-1 font-light'} tracking-wide
-                text-white text-xs capitalize
-                transition-colors duration-200 transform bg-darkblue
+                ${!textLayout ? 'bg-darkblue text-white' : 'text-darkblue px-0'}
+                text-xs capitalize
+                transition-colors duration-200 transform
                 hover:bg-cyan-700 focus:outline-none focus:ring focus:ring-cyan-700 focus:ring-opacity-80
                 disabled:bg-gray-300
+                ${context.className}
                 `}
             disabled={disabled}
             >
