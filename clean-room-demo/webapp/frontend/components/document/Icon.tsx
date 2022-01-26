@@ -71,7 +71,7 @@ const ItemIcon = (props : IconProps) => {
 
     return (
         <svg width={width} height={height} viewBox={viewBox} fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="21.9661" cy="21" r="21" fill={fill} fill-opacity={fillOpacity}/>
+            <circle cx="21.9661" cy="21" r="21" fill={fill} fillOpacity={fillOpacity}/>
             <path d="M31.9661 12.5H11.9661V14.5H31.9661V12.5Z" fill={color}/>
             <path d="M31.9661 17.5H11.9661V19.5H31.9661V17.5Z" fill={color}/>
             <path d="M31.9661 22.5H11.9661V24.5H31.9661V22.5Z" fill={color}/>
@@ -88,7 +88,7 @@ const ListIcon = (props : IconProps) => {
 
     return (
         <svg width={width} height={height} viewBox={viewBox} fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="21.4814" cy="21" r="21" fill={fill} fill-opacity={fillOpacity}/>
+            <circle cx="21.4814" cy="21" r="21" fill={fill} fillOpacity={fillOpacity}/>
             <path d="M31.4814 15H16.4814V17H31.4814V15Z" fill={color}/>
             <path d="M14.4814 15H11.4814V17H14.4814V15Z" fill={color}/>
             <path d="M31.4814 20H16.4814V22H31.4814V20Z" fill={color}/>
@@ -105,7 +105,7 @@ const AddIcon = (props : IconProps) => {
 
     return (
         <svg width={width} height={height} viewBox={viewBox} fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="21" cy="21.8828" r="21" fill={fill} fill-opacity={fillOpacity}/>
+            <circle cx="21" cy="21.8828" r="21" fill={fill} fillOpacity={fillOpacity}/>
             <path d="M25.68 23.0828H21.8V27.2028H19.79V23.0828H15.93V21.2528H19.79V17.1528H21.8V21.2528H25.68V23.0828Z" fill={color}/>
         </svg>
     )
@@ -133,7 +133,7 @@ const PencilIcon = (props : IconProps) => {
 
     return (
         <svg width={width} height={height} viewBox={viewBox} fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="11.4557" cy="11.7835" rx="11.308" ry="11.4671" fill={fill} fill-opacity={fillOpacity}/>
+            <ellipse cx="11.4557" cy="11.7835" rx="11.308" ry="11.4671" fill={fill} fillOpacity={fillOpacity}/>
             <path d="M6.81881 14.2461C6.85249 13.9532 7.01373 13.6901 7.25943 13.5271L14.5983 8.6582L16.1695 9.70061L8.673 14.6787C8.52258 14.7786 8.34791 14.8359 8.16755 14.8445L6.74219 14.9126L6.81881 14.2461Z" stroke={color}/>
         </svg>
     )
@@ -144,7 +144,7 @@ const ShareIcon = (props : IconProps) => {
 
     return (
         <svg width={width} height={height} viewBox={viewBox} fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="11.4557" cy="11.9944" rx="11.308" ry="11.4671" fill={fill} fill-opacity={fillOpacity}/>
+            <ellipse cx="11.4557" cy="11.9944" rx="11.308" ry="11.4671" fill={fill} fillOpacity={fillOpacity}/>
             <path d="M16.364 8.00652C16.364 9.11374 15.4807 9.99936 14.4057 9.99936C13.3308 9.99936 12.4474 9.11374 12.4474 8.00652C12.4474 6.89929 13.3308 6.01367 14.4057 6.01367C15.4807 6.01367 16.364 6.89929 16.364 8.00652Z" stroke={color}/>
             <path d="M16.364 15.985C16.364 17.0923 15.4807 17.9779 14.4058 17.9779C13.3308 17.9779 12.4475 17.0923 12.4475 15.985C12.4475 14.8778 13.3308 13.9922 14.4058 13.9922C15.4807 13.9922 16.364 14.8778 16.364 15.985Z" stroke={color}/>
             <path d="M9.48099 11.9948C9.48099 13.102 8.59768 13.9876 7.52272 13.9876C6.44776 13.9876 5.56445 13.102 5.56445 11.9948C5.56445 10.8876 6.44776 10.002 7.52272 10.002C8.59768 10.002 9.48099 10.8876 9.48099 11.9948Z" stroke={color}/>
@@ -159,7 +159,7 @@ const TagIcon = (props : IconProps) => {
 
     return (
         <svg width={width} height={height} viewBox={viewBox} fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="11.4557" cy="11.6409" rx="11.308" ry="11.4671" fill={fill} fill-opacity={fillOpacity}/>
+            <ellipse cx="11.4557" cy="11.6409" rx="11.308" ry="11.4671" fill={fill} fillOpacity={fillOpacity}/>
             <path d="M10.7555 7.51637L5.75687 12.5852C5.37291 12.9745 5.37289 13.6001 5.75685 13.9895L9.11979 17.3998C9.51141 17.797 10.1522 17.797 10.5439 17.3999L16.0002 11.8669C16.5538 11.3056 16.8641 10.5489 16.8641 9.76045V7.27526C16.8641 6.67863 16.345 6.21474 15.7522 6.28155L12.5557 6.64172C11.8732 6.71862 11.2378 7.02736 10.7555 7.51637Z" stroke={color}/>
             <ellipse cx="14.3348" cy="8.71992" rx="0.842834" ry="0.854689" stroke={color}/>
         </svg>
@@ -171,7 +171,7 @@ const ArrowDownIcon = (props : IconProps) => {
 
     return (
         <svg width={width} height={height} viewBox={viewBox} fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="16.8979" cy="17" r="16.4141" fill={fill} fill-opacity={fillOpacity}/>
+            <circle cx="16.8979" cy="17" r="16.4141" fill={fill} fillOpacity={fillOpacity}/>
             <path d="M16.1908 26.1825C16.5814 26.573 17.2145 26.573 17.6051 26.1825L23.969 19.8185C24.3595 19.428 24.3595 18.7948 23.969 18.4043C23.5785 18.0138 22.9453 18.0138 22.5548 18.4043L16.8979 24.0612L11.2411 18.4043C10.8506 18.0138 10.2174 18.0138 9.82688 18.4043C9.43636 18.7948 9.43636 19.428 9.82688 19.8185L16.1908 26.1825ZM15.8979 6.12891L15.8979 25.4754H17.8979L17.8979 6.12891H15.8979Z" fill={color}/>
         </svg>
     )
@@ -182,7 +182,7 @@ const ArrowUpIcon = (props : IconProps) => {
 
     return (
         <svg width={width} height={height} viewBox={viewBox} fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="16.8979" cy="17" r="16.4141" fill={fill} fill-opacity={fillOpacity}/>
+            <circle cx="16.8979" cy="17" r="16.4141" fill={fill} fillOpacity={fillOpacity}/>
             <path d="M17.1212 6.42102C16.7306 6.03049 16.0975 6.03049 15.707 6.42102L9.343 12.785C8.95247 13.1755 8.95247 13.8087 9.343 14.1992C9.73352 14.5897 10.3667 14.5897 10.7572 14.1992L16.4141 8.54234L22.0709 14.1992C22.4614 14.5897 23.0946 14.5897 23.4851 14.1992C23.8757 13.8087 23.8757 13.1755 23.4851 12.785L17.1212 6.42102ZM17.4141 26.4746L17.4141 7.12813L15.4141 7.12813L15.4141 26.4746L17.4141 26.4746Z" fill={color}/>
         </svg>
     )
@@ -193,7 +193,7 @@ const HandIcon = (props : IconProps) => {
 
     return (
         <svg width={width} height={height} viewBox={viewBox} fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="16.6782" cy="17" r="16.4141" fill={fill} fill-opacity={fillOpacity}/>
+            <circle cx="16.6782" cy="17" r="16.4141" fill={fill} fillOpacity={fillOpacity}/>
             <path d="M22.0632 10.9252V10.4759C22.0632 8.6658 20.3333 7.29284 18.5181 7.75542C17.424 5.7009 14.5013 5.78599 13.4813 7.78642C11.719 7.34808 9.96337 8.65505 9.96337 10.4836V15.7186C9.11155 15.4104 8.11449 15.5083 7.31297 16.0868C6.05976 16.9915 5.78488 18.7155 6.69181 19.9532L11.8134 26.9433C11.9398 27.1157 12.1067 27.2563 12.3002 27.3533C12.4937 27.4502 12.7083 27.5008 12.9261 27.5008H22.4418C23.0781 27.5008 23.6301 27.0738 23.773 26.471L25.0616 21.0355C25.2089 20.4139 25.2833 19.778 25.2834 19.1401V13.6795C25.2834 11.9935 23.7669 10.6914 22.0632 10.9252ZM23.2341 19.1401C23.2341 19.627 23.1771 20.1142 23.0648 20.588L21.8983 25.5085H13.278L8.36018 18.7972C7.74376 17.9559 9.00153 17.0218 9.61505 17.859L10.7732 19.4395C11.1572 19.9635 12.0125 19.7004 12.0125 19.0542V10.4836C12.0125 9.41916 13.5738 9.45382 13.5738 10.5122V16.8754C13.5738 17.2422 13.8796 17.5395 14.2569 17.5395H14.5496C14.9268 17.5395 15.2326 17.2422 15.2326 16.8754V9.03088C15.2326 7.96573 16.7939 8.00113 16.7939 9.05956V16.8754C16.7939 17.2422 17.0997 17.5395 17.4769 17.5395H17.7696C18.1469 17.5395 18.4527 17.2422 18.4527 16.8754V10.4473C18.4527 9.38172 20.0139 9.4175 20.0139 10.4759V16.8754C20.0139 17.2422 20.3197 17.5395 20.697 17.5395H20.9897C21.367 17.5395 21.6728 17.2422 21.6728 16.8754V13.7082C21.6728 12.619 23.234 12.644 23.234 13.6795V19.1401H23.2341Z" fill={color}/>
         </svg>
     )
@@ -204,7 +204,7 @@ const ZoomOutIcon = (props : IconProps) => {
 
     return (
         <svg width={width} height={height} viewBox={viewBox} fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="17.1045" cy="17" r="16.4141" fill={fill} fill-opacity={fillOpacity}/>
+            <circle cx="17.1045" cy="17" r="16.4141" fill={fill} fillOpacity={fillOpacity}/>
             <path d="M11.3574 17H22.8516" stroke={color} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     )
@@ -227,7 +227,7 @@ const AddCommentIcon = (props : IconProps) => {
 
     return (
         <svg width={width} height={height} viewBox={viewBox} fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 21C0 9.40202 9.40202 0 21 0H23C34.598 0 44 9.40202 44 21C44 32.598 34.598 42 23 42H21C9.40202 42 0 32.598 0 21Z" fill={fill} fill-opacity={fillOpacity}/>
+            <path d="M0 21C0 9.40202 9.40202 0 21 0H23C34.598 0 44 9.40202 44 21C44 32.598 34.598 42 23 42H21C9.40202 42 0 32.598 0 21Z" fill={fill} fillOpacity={fillOpacity}/>
             <path d="M30.9062 10.166H13.0942C11.4568 10.166 10.1255 11.4973 10.1255 13.1347V26.4937C10.1255 28.1311 11.4568 29.4624 13.0942 29.4624H17.5472V33.3588C17.5472 33.6881 17.8162 33.9154 18.1038 33.9154C18.2151 33.9154 18.3311 33.8829 18.4331 33.8041L24.2267 29.4624H30.9062C32.5436 29.4624 33.8749 28.1311 33.8749 26.4937V13.1347C33.8749 11.4973 32.5436 10.166 30.9062 10.166ZM31.6484 26.4937C31.6484 26.9019 31.3144 27.2359 30.9062 27.2359H23.4845L22.8908 27.6812L19.7737 30.019V27.2359H13.0942C12.686 27.2359 12.352 26.9019 12.352 26.4937V13.1347C12.352 12.7265 12.686 12.3925 13.0942 12.3925H30.9062C31.3144 12.3925 31.6484 12.7265 31.6484 13.1347V26.4937Z" fill={color}/>
             <path d="M18.1025 19.8945H25.898" stroke={color} stroke-width="2" stroke-linecap="round"/>
             <path d="M22 15.998L22 23.7935" stroke={color} stroke-width="2" stroke-linecap="round"/>

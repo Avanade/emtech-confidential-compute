@@ -53,7 +53,7 @@ export default function Index() {
                         {/* ITEM */}
                             {/* <IconView items={items} selectedId={selectedId} handleSelect={handleSelect} /> */}
                         {/* LIST */}
-                        <Table items={items} selectedId={selectedId} handleSelect={handleSelects}/>
+                        <Table items={items} selectedId={selectedId} handleSelect={handleSelect}/>
                     </div>
                 </div>
             </div>           
