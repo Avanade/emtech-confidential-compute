@@ -1,5 +1,7 @@
 import { AddIcon, ItemIcon, ListIcon } from "@/components/document/Icon";
 import Table from "@/components/document/Table";
+import IconView from "@/components/document/IconView";
+import ScreenChecker from "@/components/ScreenChecker";
 import { useState } from "react";
 
 export default function Index() {
@@ -33,6 +35,7 @@ export default function Index() {
     }
 
     return (<>
+        <ScreenChecker />
         <div className="p-10">{/* <<<<--- PARENT  */}
             <div className="relative w-full">
                 <div className="flex justify-end space-x-1 absolute right-0">
@@ -51,7 +54,7 @@ export default function Index() {
                     <div className="flex space-x-5"><span className="text-2xl text-blue-800">Documents</span><AddIcon /></div>
                     <div className="mt-5">
                         {/* ITEM */}
-                            {/* <IconView items={items} selectedId={selectedId} handleSelect={handleSelect} /> */}
+                        <IconView items={items} selectedId={selectedId} handleSelect={handleSelect} />
                         {/* LIST */}
                         <Table items={items} selectedId={selectedId} handleSelect={handleSelect}/>
                     </div>
