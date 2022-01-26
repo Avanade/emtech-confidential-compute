@@ -1,11 +1,10 @@
-import React from "react";
-import { DocumentIcon, ImageIcon, PdfIcon, PowerpointIcon, ExcelIcon, IconProps } from "./Icons";
+import React, { useState } from "react";
+import { DocumentIcon, ImageIcon, PdfIcon, PowerpointIcon, ExcelIcon, IconProps } from "./Icon";
 
-export interface ItemProps {
-    id : number,
-    fileName : string,
-    isSelected : boolean,
-    dateTime? : Date
+interface ItemProps {
+    name : string,
+    extension : string,
+    selected : boolean
 }
 
 interface Extension {
@@ -42,16 +41,13 @@ const Icon = (props : IconProps & { extension : string } ) => {
     }
 }
 
-export default function Item(props : ItemProps) {
-    const { id, fileName, isSelected, dateTime } = props;
-    const [name, extension] = fileName.split('.');
+export default function IconItem(props : ItemProps) {
+    const { name, extension, selected } = props;
 
-    
-
-    return (<div key={id} className={`w-24 ${isSelected ? 'text-blue-800' : 'text-black'}`}>
-        <div className={`relative h-24 flex justify-center ${isSelected ? 'bg-blue-100' : ' bg-gray-200 '}`}>
-            <div className="m-auto"><Icon extension={extension} color={isSelected ? '#0759a7' : '#59595C'} /></div>
+    return (<div className={`w-24 ${selected ? 'text-blue-800' : 'text-black'}`}>
+        <div className={`relative h-24 flex justify-center ${selected ? 'bg-blue-100' : ' bg-gray-200 '}`}>
+            <div className="m-auto"><Icon extension={extension} color={selected ? '#0759a7' : '#59595C'} /></div>
         </div>
-        <p className="relative truncate text-xs">{name}</p>
+        <p className="relative truncate text-xs">{name}</p>       
     </div>);
 }
