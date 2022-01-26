@@ -1,10 +1,11 @@
 import { AddIcon, ItemIcon, ListIcon } from "@/components/document/Icon";
-import Table from "@/components/document/Table";
+import ListView from "@/components/document/ListView";
 import IconView from "@/components/document/IconView";
 import ScreenChecker from "@/components/ScreenChecker";
 import { useState } from "react";
+import { Transition } from "@headlessui/react";
 
-export default function Index() {
+export default function Document() {
     const items = [
         {id : 1, fileName : 'First.doc'},
         {id : 2, fileName : 'Second.xls'},
@@ -28,10 +29,24 @@ export default function Index() {
         {id : 20, fileName : 'Twentieth.xlm'},
     ];
 
-    const [selectedId, setSelectedId] = useState(0);
+    const [selectedId, setSelectedId] = useState<number>(0);
+    const [selectedView, setSelectedView] = useState<'Icon' | 'List'>('Icon');
 
     const handleSelect = (id : number) => {
         setSelectedId(id);
+    }
+
+    const selectView = (view) => {
+        setSelectedView(view);
+    }
+
+    const View = ({viewType, items, selectedId, handleSelect}) => {
+        switch (viewType) {
+            case 'Icon':
+                return <IconView items={items} selectedId={selectedId} handleSelect={handleSelect}/>
+            case 'List':
+                return <ListView items={items} selectedId={selectedId} handleSelect={handleSelect}/>
+        }
     }
 
     return (<>
@@ -39,8 +54,8 @@ export default function Index() {
         <div className="p-10">{/* <<<<--- PARENT  */}
             <div className="relative w-full">
                 <div className="flex justify-end space-x-1 absolute right-0">
-                    <ListIcon />
-                    <ItemIcon />
+                    <div onClick={() => selectView('List')}><ListIcon fill="#0759a7" color={selectedView == 'List' ? 'white' : '#0759a7'} fillOpacity={selectedView == 'List' ? '1' : '0.1'} /></div>
+                    <div onClick={() => selectView('Icon')}><ItemIcon fill="#0759a7" color={selectedView == 'Icon' ? 'white' : '#0759a7'} fillOpacity={selectedView == 'Icon' ? '1' : '0.1'} /></div>
                 </div>
                 <div>
                     <span className="text-2xl text-blue-800">Latest</span>
@@ -51,12 +66,9 @@ export default function Index() {
                     </div>
                 </div>
                 <div className="mt-10">
-                    <div className="flex space-x-5"><span className="text-2xl text-blue-800">Documents</span><AddIcon /></div>
+                    <div className="flex space-x-5"><span className="text-2xl text-blue-800">Documents</span><AddIcon color="#0759A7" fill="#0759a7" fillOpacity="0.1"/></div>
                     <div className="mt-5">
-                        {/* ITEM */}
-                        <IconView items={items} selectedId={selectedId} handleSelect={handleSelect} />
-                        {/* LIST */}
-                        <Table items={items} selectedId={selectedId} handleSelect={handleSelect}/>
+                        <View viewType={selectedView} items={items} selectedId={selectedId} handleSelect={handleSelect}/>
                     </div>
                 </div>
             </div>           

@@ -12,7 +12,7 @@ const defaultProps = {
     selectedId : 10
 }
 
-const Table = (props : Props) => {
+const ListView = (props : Props) => {
     const { items, selectedId, handleSelect } = { ...defaultProps, ...props };
 
     return <div className="overflow-auto">
@@ -44,4 +44,4 @@ const Table = (props : Props) => {
             </div>;
 }
 
-export default Table;
+export default ListView;
