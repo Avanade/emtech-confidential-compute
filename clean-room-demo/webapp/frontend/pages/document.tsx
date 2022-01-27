@@ -1,7 +1,6 @@
 import { AddIcon, ItemIcon, ListIcon } from "@/components/document/Icon";
 import ListView from "@/components/document/ListView";
 import IconView from "@/components/document/IconView";
-import ScreenChecker from "@/components/ScreenChecker";
 import { useState } from "react";
 
 interface Item {
@@ -63,8 +62,7 @@ export default function Document() {
     }
 
     return (<>
-        <ScreenChecker />
-        <div className="p-10">{/* <<<<--- PARENT  */}
+        <div className="p-10">{/* <<<<--- PARENT CONTAINER */}
             <div className="relative w-full">
                 <div className="flex justify-end space-x-1 absolute right-0">
                     <div onClick={() => selectView('List')}><ListIcon fill="#0759a7" color={selectedView == 'List' ? 'white' : '#0759a7'} fillOpacity={selectedView == 'List' ? '1' : '0.1'} /></div>
