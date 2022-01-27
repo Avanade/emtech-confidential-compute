@@ -52,7 +52,7 @@ export default function Document() {
         setSelectedView(view);
     }
 
-    const View = ({viewType, items, selectedId, handleSelect} : {viewType : 'Icon' | 'List', items : Item[], selectedId? : number, handleSelect? : any}) => {
+    const View = ({viewType, items, selectedId, handleSelect} : {viewType : 'Icon' | 'List', items : Item[], selectedId : number, handleSelect : any}) => {
         switch (viewType) {
             case 'Icon':
                 return <IconView items={items} selectedId={selectedId} handleSelect={handleSelect}/>
@@ -71,7 +71,7 @@ export default function Document() {
                 <div>
                     <span className="relative text-2xl text-blue-800">Latest</span>
                     <div className="mt-5">
-                    <View viewType={selectedView} items={latestItems} />
+                        <View viewType={selectedView} items={latestItems} selectedId={selectedId} handleSelect={handleSelect}/>
                     </div>
                 </div>
                 <div className="mt-10">
