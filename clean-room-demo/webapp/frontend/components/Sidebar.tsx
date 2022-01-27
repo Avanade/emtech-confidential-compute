@@ -1,7 +1,7 @@
 import { NextPage } from "next"
 import {XIcon} from '@heroicons/react/outline'
 
-const Sidebar:NextPage<{title:string, visible?:boolean, position?:'left'|'right', onClose?:any}> = (context) => {
+const Sidebar:NextPage<{title:string, visible:boolean, position?:'left'|'right', onClose:any}> = (context) => {
     const {title, position} = context
     let visible = context.visible
 
@@ -10,7 +10,7 @@ const Sidebar:NextPage<{title:string, visible?:boolean, position?:'left'|'right'
     return (
         <>
             <div className={`flex flex-col divide-y
-                max-h-screen overflow-auto w-full sm:w-64
+                max-h-screen overflow-auto w-11/12 sm:w-64 md:w-72 lg:w-80
                 bg-lightpink
                 fixed top-0 p-2
                 ${visible ? 'block' : 'hidden'}
