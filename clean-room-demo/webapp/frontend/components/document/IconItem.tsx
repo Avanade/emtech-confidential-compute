@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import { DocumentIcon, ImageIcon, PdfIcon, PowerpointIcon, ExcelIcon, IconProps } from "./Icon";
 import IconType from "./IconType";
 
 interface ItemProps {

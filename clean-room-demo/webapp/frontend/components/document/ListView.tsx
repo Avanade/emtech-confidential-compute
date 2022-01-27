@@ -1,4 +1,3 @@
-import { DocumentIcon, ExcelIcon, IconProps, ImageIcon, PdfIcon, PowerpointIcon } from "./Icon";
 import IconType from "./IconType";
 
 interface Item {

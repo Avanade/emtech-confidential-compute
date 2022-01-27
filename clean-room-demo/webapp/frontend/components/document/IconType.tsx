@@ -1,4 +1,4 @@
-import { DocumentIcon, ExcelIcon, IconProps, ImageIcon, PdfIcon, PowerpointIcon } from "./Icon";
+import { DocumentIcon, ExcelIcon, IconProps, ImageIcon, PdfIcon, PowerpointIcon } from "./Icons";
 
 interface Extension {
     excel : string[],

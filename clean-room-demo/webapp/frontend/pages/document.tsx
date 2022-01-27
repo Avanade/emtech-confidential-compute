@@ -1,4 +1,4 @@
-import { AddIcon, ItemIcon, ListIcon } from "@/components/document/Icon";
+import { AddIcon, ItemIcon, ListIcon } from "@/components/document/Icons";
 import ListView from "@/components/document/ListView";
 import IconView from "@/components/document/IconView";
 import { useState } from "react";
