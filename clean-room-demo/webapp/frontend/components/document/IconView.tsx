@@ -1,7 +1,12 @@
 import Item from "./IconItem";
 
+interface Item {
+    id : number;
+    fileName : string;
+}
+
 interface Props {
-    items : { id:number, fileName:string }[]
+    items : Item[]
     selectedId? : number,
     handleSelect? : any
 }

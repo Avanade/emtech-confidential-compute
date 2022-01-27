@@ -3,30 +3,43 @@ import ListView from "@/components/document/ListView";
 import IconView from "@/components/document/IconView";
 import ScreenChecker from "@/components/ScreenChecker";
 import { useState } from "react";
-import { Transition } from "@headlessui/react";
+
+interface Item {
+    id : number;
+    fileName : string;
+    creationDate : Date;
+    active : boolean;
+}
 
 export default function Document() {
+    // SAMPLE DATA FOR LATEST DOCUMENTS
+    const latestItems = [
+        {id : 1, fileName : 'First.doc', creationDate : new Date(), active : false, },
+        {id : 2, fileName : 'Second.xls', creationDate : new Date(), active : false}
+    ]
+
+    // SAMPLE DATA FOR DOCUMENTS
     const items = [
-        {id : 1, fileName : 'First.doc'},
-        {id : 2, fileName : 'Second.xls'},
-        {id : 3, fileName : 'Third.png'},
-        {id : 4, fileName : 'Fourth.pdf'},
-        {id : 5, fileName : 'Fifth.pdf'},
-        {id : 6, fileName : 'Sixth.pdf'},
-        {id : 7, fileName : 'Seventh.pptx'},
-        {id : 8, fileName : 'Eigth.doc'},
-        {id : 9, fileName : 'Ninth.xlsm'},
-        {id : 10, fileName : 'Tenth.jpeg'},
-        {id : 11, fileName : 'Eleventh.doc'},
-        {id : 12, fileName : 'Twelfth.docx'},
-        {id : 13, fileName : 'Thirteenth.pdf'},
-        {id : 14, fileName : 'Fourteenth.png'},
-        {id : 15, fileName : 'Fifthteenth.doc'},
-        {id : 16, fileName : 'Sixteenth.pdf'},
-        {id : 17, fileName : 'Seventeenth.pdf'},
-        {id : 18, fileName : 'Eigteenth.pptx'},
-        {id : 19, fileName : 'Nineteenth.png'},
-        {id : 20, fileName : 'Twentieth.xlm'},
+        {id : 1, fileName : 'First.doc', creationDate : new Date(), active : false},
+        {id : 2, fileName : 'Second.xls', creationDate : new Date(), active : false},
+        {id : 3, fileName : 'Third.png', creationDate : new Date(), active : true},
+        {id : 4, fileName : 'Fourth.pdf', creationDate : new Date(), active : false},
+        {id : 5, fileName : 'Fifth.pdf', creationDate : new Date(), active : false},
+        {id : 6, fileName : 'Sixth.pdf', creationDate : new Date(), active : false},
+        {id : 7, fileName : 'Seventh.pptx', creationDate : new Date(), active : true},
+        {id : 8, fileName : 'Eigth.doc', creationDate : new Date(), active : false},
+        {id : 9, fileName : 'Ninth.xlsm', creationDate : new Date(), active : false},
+        {id : 10, fileName : 'Tenth.jpeg', creationDate : new Date(), active : false},
+        {id : 11, fileName : 'Eleventh.doc', creationDate : new Date(), active : false},
+        {id : 12, fileName : 'Twelfth.docx', creationDate : new Date(), active : true},
+        {id : 13, fileName : 'Thirteenth.pdf', creationDate : new Date(), active : false},
+        {id : 14, fileName : 'Fourteenth.png', creationDate : new Date(), active : false},
+        {id : 15, fileName : 'Fifthteenth.doc', creationDate : new Date(), active : false},
+        {id : 16, fileName : 'Sixteenth.pdf', creationDate : new Date(), active : true},
+        {id : 17, fileName : 'Seventeenth.pdf', creationDate : new Date(), active : false},
+        {id : 18, fileName : 'Eigteenth.pptx', creationDate : new Date(), active : false},
+        {id : 19, fileName : 'Nineteenth.png', creationDate : new Date(), active : false},
+        {id : 20, fileName : 'Twentieth.xlm', creationDate : new Date(), active : true}
     ];
 
     const [selectedId, setSelectedId] = useState<number>(0);
@@ -40,7 +53,7 @@ export default function Document() {
         setSelectedView(view);
     }
 
-    const View = ({viewType, items, selectedId, handleSelect}) => {
+    const View = ({viewType, items, selectedId, handleSelect} : {viewType : 'Icon' | 'List', items : Item[], selectedId? : number, handleSelect? : any}) => {
         switch (viewType) {
             case 'Icon':
                 return <IconView items={items} selectedId={selectedId} handleSelect={handleSelect}/>
@@ -58,11 +71,9 @@ export default function Document() {
                     <div onClick={() => selectView('Icon')}><ItemIcon fill="#0759a7" color={selectedView == 'Icon' ? 'white' : '#0759a7'} fillOpacity={selectedView == 'Icon' ? '1' : '0.1'} /></div>
                 </div>
                 <div>
-                    <span className="text-2xl text-blue-800">Latest</span>
+                    <span className="relative text-2xl text-blue-800">Latest</span>
                     <div className="mt-5">
-                        {/* ITEM */}
-                            {/* <IconView items={items} selectedId={6} /> */}
-                        {/* LIST */}
+                    <View viewType={selectedView} items={latestItems} />
                     </div>
                 </div>
                 <div className="mt-10">

@@ -1,8 +1,15 @@
 import { DocumentIcon, ExcelIcon, IconProps, ImageIcon, PdfIcon, PowerpointIcon } from "./Icon";
 import IconType from "./IconType";
 
+interface Item {
+    id : number;
+    fileName : string;
+    creationDate : Date;
+    active : boolean;
+}
+
 interface Props {
-    items : { id:number, fileName:string }[]
+    items : Item[]
     selectedId? : number,
     handleSelect? : any
 }
@@ -27,7 +34,7 @@ const ListView = (props : Props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {items.map(({id, fileName} : { id : number, fileName : string}) => {
+                        {items.map(({id, fileName, creationDate, active} : Item) => {
                         const [name, extension] = fileName.split('.');
                         return <tr key={id} className={`${selectedId == id ?  'bg-blue-50 text-blue-800' : 'text-gray-500'}  border-b border-gray-100 border-dotted`} onClick={() => handleSelect(id)}>
                             <td className="py-1 align-middle">{id}</td>
@@ -35,8 +42,8 @@ const ListView = (props : Props) => {
                                 <IconType extension={extension} width={30} height={30} />
                             </td>
                             <td className="py-1 align-middle">{name}</td>
-                            <td className="py-1 align-middle">01/01/2022</td>
-                            <td className="py-1 align-middle">Yes</td>
+                            <td className="py-1 align-middle">{`${('0' + creationDate.getMonth() + 1).slice(-2)}/${creationDate.getDate()}/${creationDate.getFullYear()}`}</td>
+                            <td className="py-1 align-middle">{active ? 'YES' : 'NO'}</td>
                         </tr>
                         })}
                     </tbody>
