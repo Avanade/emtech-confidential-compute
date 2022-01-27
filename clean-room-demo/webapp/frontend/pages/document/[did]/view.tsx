@@ -9,6 +9,7 @@ import Button from "@/components/Button";
 import CommentItem, {IComment} from "@/components/CommentItem";
 import CommentPopup from "@/components/CommentPopup";
 import PopupButton from "@/components/PopupButton";
+import CommentAdd from "@/components/CommentAdd";
 
 export default function ViewDocument() {
   const router = useRouter();
@@ -60,6 +61,11 @@ export default function ViewDocument() {
                 </PopupButton>
               ))
             }
+          </div>
+          <div>
+            <PopupButton label="Add comment" persistent closeButton>
+              <CommentAdd></CommentAdd>
+            </PopupButton>
           </div>
         </div>
       </BasicPage>
