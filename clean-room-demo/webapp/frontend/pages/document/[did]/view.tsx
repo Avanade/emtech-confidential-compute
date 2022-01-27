@@ -10,11 +10,13 @@ import CommentItem, {IComment} from "@/components/CommentItem";
 import CommentPopup from "@/components/CommentPopup";
 import PopupButton from "@/components/PopupButton";
 import CommentAdd from "@/components/CommentAdd";
+import Modal from "@/components/Modal";
 
 export default function ViewDocument() {
   const router = useRouter();
   const { did } = router.query;
   const [sidebarVisible, setSidebarVisible] = useState(false)
+  const [modalShow, setModalShow] = useState(false)
 
   // sample data
   let d = new Date('01/25/2022')
@@ -62,10 +64,16 @@ export default function ViewDocument() {
               ))
             }
           </div>
-          <div>
+          <div className="mt-3">
             <PopupButton label="Add comment" persistent closeButton>
               <CommentAdd></CommentAdd>
             </PopupButton>
+          </div>
+          <div className="mt-3">
+            <Button onClick={()=>setModalShow(true)}>Show Modal</Button>
+            <Modal title="Add Comment" visible={modalShow} onClose={()=>setModalShow(false)} persistent >
+              Test modal
+            </Modal>
           </div>
         </div>
       </BasicPage>
