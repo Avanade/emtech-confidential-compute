@@ -30,32 +30,32 @@ const Modal:NextPage<{title:string, visible:boolean, persistent?:boolean, onClos
         return() => document.removeEventListener('click', clickedModalBg)
     })
 
+    const getWidth = (width) => {
+        switch (width) {
+            case 'sm': return 'w-full md:w-4/12 lg:w-4/12 xl:4/12';
+            case 'md': return 'w-full md:w-6/12 lg:w-6/12 xl:6/12';
+            case 'lg': return 'w-full md:w-10/12 lg:w-10/12 xl:10/12';
+            case 'full': return 'w-full';
+        }
+    }
+
     const modal = () => {
         if(!visible){
             return null
         } else {
             return (
                 <>
-                    <div className="absolute top-0 left-0 bg-black/75 w-full h-full" ref={modalBg} >
-                        <div className={`flex place-content-center m-10 max-h-[90%] max-w-[90%]`} ref={modalMain}>
-                            <div className={`bg-white min-w-[25%] divide-y-2  overflow-auto
-                                ${width=='sm' ? 'w-[25%]' : null}
-                                ${width=='md' ? 'w-[50%]' : null}
-                                ${width=='lg' ? 'w-[75%]' : null}
-                                ${width=='full' ? 'w-[100%]' : null}
-                                rounded
-                            `}>
-                                <div className="flex m-3 text-lg font-medium">
-                                    <div className="base-[95%] w-[95%]">{title}</div>
-                                    <div className="base-[5%] w-[5%]">
-                                        <div>
-                                            <XIcon width={25} onClick={context.onClose}></XIcon>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="m-3">
-                                    {context.children}
-                                </div>
+                    <div className="flex fixed top-0 w-screen h-screen bg-black/50 p-3 z-50" ref={modalBg}>
+                        {/* MAIN MODAL */}
+                        <div className={`bg-[#f9f9f9] m-auto shadow-xl py-3 px-5 h-auto ${getWidth(width)}`} ref={modalMain}>
+                            {/* MODAL HEADER */}
+                            <div className="flex justify-between mb-3">
+                                <span className="text-xl text-blue-900">{title}</span>
+                                <XIcon className="text-blue-900" width={25}/>
+                            </div>
+                            {/* MODAL BODY */}
+                            <div>
+                                {context.children}
                             </div>
                         </div>
                     </div>
