@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import { useEffect, useRef } from "react";
 
 const Modal:NextPage<{title:string, visible:boolean, persistent?:boolean, onClose:any, width?:'sm'|'md'|'lg'|'full'}> = (context) => {
-    const {title, width} = context
+    const {title, width, onClose} = context
     const visible = context.visible || false
     const persistent = context.persistent || false
 
@@ -32,9 +32,9 @@ const Modal:NextPage<{title:string, visible:boolean, persistent?:boolean, onClos
 
     const getWidth = (width) => {
         switch (width) {
-            case 'sm': return 'w-full md:w-4/12 lg:w-4/12 xl:4/12';
-            case 'md': return 'w-full md:w-6/12 lg:w-6/12 xl:6/12';
-            case 'lg': return 'w-full md:w-10/12 lg:w-10/12 xl:10/12';
+            case 'sm': return 'w-full md:w-4/12';
+            case 'md': return 'w-full md:w-6/12';
+            case 'lg': return 'w-full md:w-10/12';
             case 'full': return 'w-full';
         }
     }
@@ -51,7 +51,7 @@ const Modal:NextPage<{title:string, visible:boolean, persistent?:boolean, onClos
                             {/* MODAL HEADER */}
                             <div className="flex justify-between mb-3">
                                 <span className="text-xl text-blue-900">{title}</span>
-                                <XIcon className="text-blue-900" width={25}/>
+                                <XIcon className="text-blue-900" width={25} onClick={() => onClose()} />
                             </div>
                             {/* MODAL BODY */}
                             <div>
