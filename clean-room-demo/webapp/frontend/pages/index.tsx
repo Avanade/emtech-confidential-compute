@@ -92,10 +92,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {/* <ShareWithModal visible={visible} onClose={() => { setVisible(false) }} /> */}
-      <Modal visible={visible} onClose={() => { setVisible(false); }} persistent title={"MODAL TITLE"} width="md">
-        <p>MODAL BODY</p>
-      </Modal>
+      <ShareWithModal visible={visible} onClose={() => { setVisible(false) }} />
     </>
   );
 
