@@ -22,7 +22,7 @@ class LoginPage extends Component {
                             <div className="md:basis-1/2 md:w-1/2">
                                 <div className="flex flex-col relative">
                                     <div>
-                                        <Image src={imgSrc} width={705} height={590} layout="responsive" objectFit="cover" objectPosition={'left center'}></Image>
+                                        <Image src={imgSrc} width={705} height={500} layout="responsive" objectFit="cover" objectPosition={'left center'}></Image>
                                     </div>
                                     <div className="absolute py-3 bg-lightblue text-white bottom-0 w-full right-0 text-center text-xs whitespace-pre-wrap">
                                         {msg}
