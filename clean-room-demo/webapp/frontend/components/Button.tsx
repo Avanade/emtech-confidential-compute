@@ -9,10 +9,10 @@ const Button:NextPage<{onClick?:any, disabled?:boolean, small?:boolean, textLayo
     return (
         <button onClick={context.onClick}
             className={`${!small ? 'px-4 py-2 font-medium' : 'px-2 py-1 font-light'} tracking-wide
-                ${!textLayout ? 'bg-darkblue text-white' : 'text-darkblue px-0'}
+                ${!textLayout ? 'bg-darkblue text-white hover:bg-cyan-700' : 'text-darkblue px-0 hover:text-cyan-700'}
                 text-xs capitalize
                 transition-colors duration-200 transform
-                hover:bg-cyan-700 focus:outline-none focus:ring focus:ring-cyan-700 focus:ring-opacity-80
+                focus:outline-none focus:ring focus:ring-cyan-700 focus:ring-opacity-80
                 disabled:bg-gray-300
                 ${context.className}
                 `}

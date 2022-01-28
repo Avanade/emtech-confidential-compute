@@ -17,7 +17,7 @@ const Sidebar:NextPage<{title:string, visible:boolean, position?:'left'|'right',
                 ${pos=='right' ? 'right-0' : null}
             `}>
                 <div className="flex bg-white">
-                    <div className="base-11/12 w-11/12 font-medium m-2">{title}</div>
+                    <div className="base-11/12 w-11/12 font-medium m-2 text-zinc-600">{title}</div>
                     <div className="base-1/12 w-1/12 m-2">
                         <button onClick={context.onClose}><XIcon width={25}/></button>
                     </div>

@@ -45,7 +45,7 @@ const Modal:NextPage<{title:string, visible:boolean, persistent?:boolean, onClos
         } else {
             return (
                 <>
-                    <div className="flex fixed top-0 w-screen h-screen bg-black/50 p-3 z-50" ref={modalBg}>
+                    <div className="flex fixed left-0 top-0 w-screen h-screen bg-black/50 p-3 z-50" ref={modalBg}>
                         {/* MAIN MODAL */}
                         <div className={`bg-[#f9f9f9] m-auto shadow-xl py-3 px-5 h-auto ${getWidth(width)}`} ref={modalMain}>
                             {/* MODAL HEADER */}
