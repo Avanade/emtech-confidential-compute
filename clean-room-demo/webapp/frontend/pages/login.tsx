@@ -7,6 +7,7 @@ import Button from '../components/Button'
 import {UserIcon, KeyIcon} from '@heroicons/react/outline'
 import Message from '../components/Message'
 import Camera from '../components/Camera'
+import Docv from '../components/Docv'
 
 export default function Login() {
   // let step = 1
@@ -39,6 +40,7 @@ export default function Login() {
     setStep(5)
     // Update code for actual procedure
   }
+  
 
   const getImage = (v) => {
     // Image in base64
@@ -123,12 +125,30 @@ export default function Login() {
       </>
     )
   }
+  const Docv = () =>{
+    return (
+      <>
+        <LoginPage>
+          <LoginPage.Step>6</LoginPage.Step>
+          <LoginPage.Main>
+            <div className="text-secondary font-semibold">Scan your corporate badge</div>
+            <p className="text-xs">Scanning in progress...</p>
+            <div className="m-5">
+              <Docv  ></Docv>
+            </div>
+          </LoginPage.Main>
+          <LoginPage.Bottom><Button onClick={() => scanSuccessful() }>Back to start</Button></LoginPage.Bottom>
+        </LoginPage>
+      </>
+    )
+  }
   const loadView = () => {
     switch (step){ 
-      case 2: return validateView()
+      case 2: return//validateView()
       case 3: return successView()
       case 4: return scanView()
       case 5: return scanSuccessfulView(username)
+      case 6: return  Docv()
       default: return startView()
     }
   }
