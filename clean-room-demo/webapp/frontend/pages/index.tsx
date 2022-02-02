@@ -1,3 +1,4 @@
+import Modal from "@/components/Modal";
 import {
   FingerPrintIcon,
   LockClosedIcon,

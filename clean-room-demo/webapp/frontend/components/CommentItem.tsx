@@ -1,12 +1,6 @@
+import { IComment } from "@/lib/interface/document"
 import { NextPage } from "next"
 import Avatar from './Avatar'
-
-export interface IComment {
-    id: number,
-    name: string,
-    date: Date,
-    body: string
-}
 
 const CommentItem:NextPage<{comment:IComment, className?:string, smaller?:boolean}> = (context) => {
     const {id, name, date, body} = context.comment

@@ -45,7 +45,7 @@ const PopupButton:NextPage<{
                     onClick={()=>setShow(!show)}>
                     {context.label}
                 </div>
-                <div ref={divPopup} className={`absolute mt-3 min-h-[60px] min-w-[60px] max-h-60 w-auto bg-slate-100 text-center
+                <div ref={divPopup} className={`absolute mt-3 z-10 min-h-[60px] min-w-[60px] max-h-60 w-auto bg-slate-100 text-center
                         rounded-lg border-slate-200 border-2 overflow-auto overflow-x-hidden
                         ${show ? 'block' : 'hidden'}
                         ${popupPosition=='up' ? 'bottom-[125%]' : null}
