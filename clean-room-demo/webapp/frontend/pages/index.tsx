@@ -1,6 +1,3 @@
-import MediaNav from "@/components/document/MediaNav";
-import ShareWithModal from "@/components/document/ShareWithModal";
-import Modal from "@/components/Modal";
 import {
   FingerPrintIcon,
   LockClosedIcon,
@@ -8,7 +5,6 @@ import {
   InboxInIcon,
   LoginIcon,
 } from "@heroicons/react/outline";
-import { useState } from "react";
 
 const features = [
   {
@@ -37,10 +33,8 @@ const features = [
 ];
 
 export default function Home() {
-  const [visible, setVisible] = useState<boolean>(true);
   let body = (
     <>
-    <MediaNav />
       <div className="py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
           <h1 className="text-3xl font-bold leading-tight text-gray-900">
@@ -92,7 +86,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <ShareWithModal visible={visible} onClose={() => { setVisible(false) }} />
     </>
   );
 
