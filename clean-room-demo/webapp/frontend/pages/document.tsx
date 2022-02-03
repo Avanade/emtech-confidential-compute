@@ -2,6 +2,8 @@ import { AddIcon, ItemIcon, ListIcon } from "@/components/document/Icons";
 import ListView from "@/components/document/ListView";
 import IconView from "@/components/document/IconView";
 import { useState } from "react";
+import Modal from "@/components/Modal";
+import Upload from "@/components/Upload";
 
 interface Item {
     id : number;
@@ -43,6 +45,8 @@ export default function Document() {
 
     const [selectedId, setSelectedId] = useState<number>(0);
     const [selectedView, setSelectedView] = useState<'Icon' | 'List'>('Icon');
+    const [modalAdd, setModalAdd] = useState(false)
+    const [isUploading, setIsUploading] = useState(false)
 
     const handleSelect = (id : number) => {
         setSelectedId(id);
@@ -61,6 +65,16 @@ export default function Document() {
         }
     }
 
+    const onUpload = (file:File) => {
+        setIsUploading(true)
+        console.log('File selected: ', file)
+        // TODO: Add upload functionality to API
+    }
+
+    const closeModalAdd = () => {
+        setModalAdd(false)
+        setIsUploading(false)
+    }
     return (<>
         <div className="p-10">{/* <<<<--- PARENT CONTAINER */}
             <div className="relative w-full">
@@ -75,12 +89,15 @@ export default function Document() {
                     </div>
                 </div>
                 <div className="mt-10">
-                    <div className="flex space-x-5"><span className="text-2xl text-blue-800">Documents</span><AddIcon color="#0759A7" fill="#0759a7" fillOpacity="0.1"/></div>
+                    <div className="flex space-x-5"><span className="text-2xl text-blue-800">Documents</span><span onClick={()=>setModalAdd(true)}><AddIcon color="#0759A7" fill="#0759a7" fillOpacity="0.1" /></span></div>
                     <div className="mt-5">
                         <View viewType={selectedView} items={items} selectedId={selectedId} handleSelect={handleSelect}/>
                     </div>
                 </div>
-            </div>           
+            </div>   
+            <Modal title="Add Document" visible={modalAdd} persistent onClose={()=>closeModalAdd()} width="md" >
+                <Upload onUpload={(f:File)=>onUpload(f)} isUploading={isUploading}></Upload>
+            </Modal>        
         </div>
     </>);
 }
