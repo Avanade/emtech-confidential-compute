@@ -21,19 +21,11 @@ const Upload:NextPage<{onUpload:any, isUploading:boolean}> = (context) => {
         setFilename("")
     }
 
-    // const handleUpload = (f) => {
-    //     console.log('Upload: ', f)
-    // }
-
     const handleFiles = (f) => {
         let fArray = ([...f])
         setFile(fArray[0])
-        setDocumentTitle(fArray[0].name)
+        setDocumentTitle(fArray[0].name.replace(/\.[^/.]+$/, ""))
         setFilename(fArray[0].name)
-        // console.log('Upload: ', fArray[0])
-        // fileArray.forEach(uploadFile)
-        // setFiles(p => f)
-        // context.onUpload(f)
       }
 
     const preventDefaults = (e) => {
@@ -49,10 +41,8 @@ const Upload:NextPage<{onUpload:any, isUploading:boolean}> = (context) => {
     }
     
     const handleDrop = (e) => {
-        // console.log('Drop: ', e)
         let dt = e.dataTransfer
         let files = dt.files
-        // console.log(files)
         handleFiles(files)
     }
     
