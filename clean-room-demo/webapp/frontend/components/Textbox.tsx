@@ -1,55 +1,54 @@
-import React from "react"
+import React, { ChangeEvent } from "react"
 
 export interface Props {
     //REQUIRED
-    id : string,
     name : string,
     value : string,
 
-    onChange? : any,
+    //EVENT
+    onChange(e : ChangeEvent<HTMLInputElement>) : void
 
-    preicon? : any,
+    PreIcon? : any | undefined,
     disabled? : boolean,
     required? : boolean,
     invalid? : boolean,
 
     type : "text" | "password" | "email"
+
+    //VALIDATION
+    errorMessage : string,
 }
 
 export default function Textbox(props : Props) {
 
     const newProps  = {
-        id: props.id,
         name: props.name,
         value: props.value,
 
-        onChange : props.onChange,
-
-        preicon : props.preicon,
+        PreIcon : props.PreIcon,
         disabled: props.disabled || false,
 
-        invalid :  props.invalid || false,
-
         type: props.type || "text",
+
+        errorMessage : props.errorMessage,
+
+        //VALIDATION
+        onChange : props.onChange,
     };
 
-    // console.log(newProps);
-
     return (<>
-            <label className={`relative ${newProps.invalid ? 'border-red-500 text-red-500' : ''} focus-within:text-gray-600 m-1 block`}>
+        <label className={`relative ${newProps.errorMessage != "" ? 'border-red-500 text-red-500' : ''} focus-within:text-gray-600 m-1 block`}>
+            {newProps.PreIcon != undefined ? <newProps.PreIcon className={`pointer-events-none w-6 h-3/5 absolute top-1/2 transform -translate-y-1/2 left-1`} /> : ""}
+            <input 
+                type={newProps.type} 
+                name={newProps.name}
+                placeholder={newProps.errorMessage != "" ? newProps.errorMessage : newProps.name}
+                value={newProps.value}
+                onChange={e => newProps.onChange(e)}
 
-                {/* {newProps.preicon == undefined ? '' : React.cloneElement(newProps.preicon, { className: "pointer-events-none w-6 h-6 absolute top-1/2 transform -translate-y-1/2 left-3" })} */}
-                <newProps.preicon className={`pointer-events-none w-6 h-3/5 absolute top-1/2 transform -translate-y-1/2 left-3`} />
-                <input 
-                    type={newProps.type} 
-                    name={newProps.name}
-                    placeholder={newProps.name}
-                    id={newProps.id}
-                    value={newProps.value}
-                    onChange={(e) => newProps.onChange(e.target.value)}
-
-                    className={`form-input w-full border ${newProps.invalid ? 'border-red-500 text-red-500 placeholder:text-red-500' : 'border-gray-500 text-gray-500'} py-1 px-3 bg-white placeholder-gray-400 ${newProps.preicon == undefined ? '' : 'pl-12'} appearance-none block focus:outline-none`}
-                    />
-            </label>
+                className={`form-input w-full border ${newProps.errorMessage != "" ? 'border-red-500 text-red-500 placeholder:text-red-500' : 'border-gray-500 text-gray-500'} py-1 px-3 bg-white placeholder-gray-400 appearance-none block focus:outline-none ${props.PreIcon != undefined ? "pl-7" : ""}`}
+                />
+            {/* {newProps.errorMessage != "" ? <span className="text-red-500 text-xs absolute top-8">{newProps.errorMessage}</span> : ""} */}
+        </label>
     </>);
 }
