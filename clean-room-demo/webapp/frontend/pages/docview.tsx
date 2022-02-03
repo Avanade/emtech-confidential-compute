@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import WebViewer from '@pdftron/webviewer';
 
 export default function HomePage() {
   const viewer = useRef(null);

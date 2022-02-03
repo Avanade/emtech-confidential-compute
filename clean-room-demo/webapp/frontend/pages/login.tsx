@@ -125,23 +125,7 @@ export default function Login() {
       </>
     )
   }
-  const Docv = () =>{
-    return (
-      <>
-        <LoginPage>
-          <LoginPage.Step>6</LoginPage.Step>
-          <LoginPage.Main>
-            <div className="text-secondary font-semibold">Scan your corporate badge</div>
-            <p className="text-xs">Scanning in progress...</p>
-            <div className="m-5">
-              <Docv  ></Docv>
-            </div>
-          </LoginPage.Main>
-          <LoginPage.Bottom><Button onClick={() => scanSuccessful() }>Back to start</Button></LoginPage.Bottom>
-        </LoginPage>
-      </>
-    )
-  }
+
   const loadView = () => {
     switch (step){ 
       case 2: return validateView()
