@@ -54,8 +54,8 @@ export default function Login() {
             <div className="text-secondary font-semibold">Log In</div>
             <p className="text-xs">Use your corporate Username and generate your YubiKey to log in</p>
             <div className="mt-5 md:mt-10">
-              <Textbox value={username} id="Username" invalid={usernameIsInvalid} name="Username" type="text" onChange={(value:string) => setUsername(value)} preicon={UserIcon}/>
-              <Textbox value={password} id="Password" invalid={passwordIsInvalid} name="Password" type="password" onChange={(value:string) => setPassword(value)} preicon={KeyIcon}/>
+              <Textbox value={username} errorMessage={usernameIsInvalid ? "Invalid Username" : ""} name="Username" type="text" onChange={(e) => setUsername(e.target.value)} PreIcon={UserIcon}/>
+              <Textbox value={password} errorMessage={passwordIsInvalid ? "Invalid Password" : ""} name="Password" type="password" onChange={(e) => setPassword(e.target.value)} PreIcon={KeyIcon}/>
             </div>
           </LoginPage.Main>
           <LoginPage.Bottom><Button onClick={() => validate()} disabled={username ? false : true}>Login</Button></LoginPage.Bottom>
