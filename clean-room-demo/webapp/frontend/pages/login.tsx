@@ -7,7 +7,7 @@ import Button from '../components/Button'
 import {UserIcon, KeyIcon} from '@heroicons/react/outline'
 import Message from '../components/Message'
 import Camera from '../components/Camera'
-import Docv from '../components/Docv'
+
 
 export default function Login() {
   // let step = 1
@@ -144,11 +144,10 @@ export default function Login() {
   }
   const loadView = () => {
     switch (step){ 
-      case 2: return//validateView()
+      case 2: return validateView()
       case 3: return successView()
       case 4: return scanView()
       case 5: return scanSuccessfulView(username)
-      case 6: return  Docv()
       default: return startView()
     }
   }
