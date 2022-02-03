@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { NextPage } from "next";
+//import WebViewer from '@pdftron/webviewer';
 
 const Docv: NextPage<{User:string}> =(context, )  => {
   const viewer = useRef(null);
@@ -8,7 +9,7 @@ const Docv: NextPage<{User:string}> =(context, )  => {
     import('@pdftron/webviewer').then(() => {
       WebViewer(
         {
-          path: '/lib',
+          path: '../lib',
           //initialDoc: '/lib/AZ-900 Certificate.pdf',
           initialDoc: '../lib/sample.pdf',
           //initialDoc: '/lib/Sample word doc.docx',
@@ -26,23 +27,23 @@ const Docv: NextPage<{User:string}> =(context, )  => {
           // load the annotation data
           const response = await fetch('../lib/antote.log');
           const xfdfString = await response.text();
-          console.log('xfdfString');
-          console.log(xfdfString);
+         // console.log('xfdfString');
+         // console.log(xfdfString);
           return xfdfString;
         });
 
                 // you can now call WebViewer APIs here...
         annotationManager.addEventListener('annotationChanged', (annotations, action) => {
           if (action === 'add') {
-            console.log('this is a change that added annotations');
+         //   console.log('this is a change that added annotations');
           } else if (action === 'modify') {
-            console.log('this change modified annotations');
+         //   console.log('this change modified annotations');
           } else if (action === 'delete') {
-            console.log('there were annotations deleted');
+         //   console.log('there were annotations deleted');
           }
 
           annotations.forEach((annot) => {
-            console.log('annotation page number', annot.PageNumber);
+         //   console.log('annotation page number', annot.PageNumber);
           });
         });
 
@@ -53,7 +54,7 @@ const Docv: NextPage<{User:string}> =(context, )  => {
             onClick: async () => {
               const xfdfStringreader = await annotationManager.exportAnnotations({ links: false, widgets: false })
 
-              console.log(xfdfStringreader);
+              //console.log(xfdfStringreader);
 
               // save the annotations
             }
