@@ -2,8 +2,6 @@ import { IComment } from "@/lib/interface/document"
 import { NextPage } from "next"
 import Avatar from './Avatar'
 
-
-
 const CommentItem:NextPage<{comment:IComment, className?:string, smaller?:boolean}> = (context) => {
     const {id, name, date, body} = context.comment
     const smaller = context.smaller || false
