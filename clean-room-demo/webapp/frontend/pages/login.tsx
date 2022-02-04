@@ -102,7 +102,7 @@ export default function Login() {
           <LoginPage.Main>
           <Message caption={`Welcome ${name}!`} subtext="Scanning Completed" type="success"></Message>
           </LoginPage.Main>
-          <LoginPage.Bottom><Button onClick={() => start()}>Start Again</Button></LoginPage.Bottom>
+          <LoginPage.Bottom><Link href="/document"><Button>Continue</Button></Link></LoginPage.Bottom>
         </LoginPage>
       </>
     )
@@ -120,7 +120,7 @@ export default function Login() {
               <Camera onCapture={getImage}></Camera>
             </div>
           </LoginPage.Main>
-          <LoginPage.Bottom><Button onClick={() => scanSuccessful() }>Back to start</Button></LoginPage.Bottom>
+          <LoginPage.Bottom><Button onClick={() => scanSuccessful() }>Continue</Button></LoginPage.Bottom>
         </LoginPage>
       </>
     )
