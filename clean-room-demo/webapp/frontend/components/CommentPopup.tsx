@@ -1,9 +1,10 @@
 import { NextPage } from "next"
-import CommentItem, {IComment} from "./CommentItem"
+import CommentItem from "./CommentItem"
 import {DotsHorizontalIcon} from "@heroicons/react/outline"
 import { useState } from "react"
 import Button from "@/components/Button"
 import PopupButton from "./PopupButton"
+import { IComment } from "@/lib/interface/document"
 
 const CommentPopup:NextPage<{comment:IComment, smaller?:boolean}> = (context) => {
     const {comment} = context

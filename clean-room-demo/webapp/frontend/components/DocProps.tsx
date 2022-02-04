@@ -4,6 +4,7 @@ import { NextPage } from "next";
 import { useState } from "react";
 import Avatar from "./Avatar";
 import Button from "./Button";
+import ShareWithModal from "./document/ShareWithModal";
 import KeyValue from "./KeyValue";
 import Modal from "./Modal";
 import PopupButton from "./PopupButton";
@@ -76,11 +77,7 @@ const DocProps:NextPage<{document:IDocument}> = (context) => {
                 }
                 action={<>
                     <Button textLayout onClick={()=>setModalShared(true)}><PencilIcon width={15} className="text-primary"/></Button>
-                    {/* <PopupButton noBackground popupPosition="left" label={<PencilIcon width={15} className="text-primary"/>}></PopupButton> */}
-                    <Modal title="Shared With" persistent visible={modalShared} onClose={()=>setModalShared(false)}>
-                        Shared With
-                        {/* Use 'SharedWith.tsx' component */}
-                    </Modal>
+                    <ShareWithModal visible={modalShared} onClose={()=>{setModalShared(false)}}></ShareWithModal>
                     </>}>
                 </KeyValue>
             </div>
@@ -99,7 +96,7 @@ const DocProps:NextPage<{document:IDocument}> = (context) => {
                     <Modal title="Add Tag" visible={modalTags} onClose={()=>setModalTags(false)}>
                         <div className="flex flex-col">
                             <div>
-                                <Textbox id="txtTag" name="Enter Tag" invalid={newTagExists} value={newTag} type="text" onChange={(v:string)=>{setNewTag(v); setNewTagExists(false)}} preicon={HashtagIcon}/>
+                                <Textbox errorMessage="" name="Enter Tag" invalid={newTagExists} value={newTag} type="text" onChange={(e)=>{setNewTag(e.target.value); setNewTagExists(false)}} PreIcon={HashtagIcon}/>
                             </div>
                             {/* Line below can be removed. Use invalidMessage property on Textbox when available. */}
                             {newTagExists ? <div className="text-xs text-red-500 py-1"> *This tag is already existing.</div> : null}

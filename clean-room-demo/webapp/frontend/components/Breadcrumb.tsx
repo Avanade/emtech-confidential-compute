@@ -3,16 +3,16 @@ import { ArrowNarrowLeftIcon } from '@heroicons/react/outline'
 
 export function Breadcrumb(props) {
     return (
-        <div className="flex flex-row">
-            <div className='basis-1/3' >
+        <div className="flex flex-row justify-between m-3">
+            <div>
                 <Link href={props.link}>
-                    <a className="underline text-primary"    >
+                    <a className="text-primary"    >
                         <div className="flex flex-row">
                             <div >
                                 <ArrowNarrowLeftIcon width={25} />
                             </div>
                             <div >
-                                <span className="px-1">
+                                <span className="text-bodyprimary">
                                     {props.label}
                                 </span>
                             </div>
@@ -20,11 +20,11 @@ export function Breadcrumb(props) {
                     </a>
                 </Link>
             </div>
-            <div className='basis-1/3 place-content-center text-blue-900 align-center text-center'>
+            <div className='text-blue-900'>
                 {props.title}
             </div>
-            <div className='basis-1/3 self-end align-end text-end text-right'>
-                {props.action}
+            <div>
+                <div>{props.action}</div>
             </div>
         </div>
     )
