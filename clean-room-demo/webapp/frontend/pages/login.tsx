@@ -8,6 +8,7 @@ import {UserIcon, KeyIcon} from '@heroicons/react/outline'
 import Message from '../components/Message'
 import Camera from '../components/Camera'
 
+
 export default function Login() {
   // let step = 1
   const [step, setStep] = useState(1)
@@ -39,6 +40,7 @@ export default function Login() {
     setStep(5)
     // Update code for actual procedure
   }
+  
 
   const getImage = (v) => {
     // Image in base64
@@ -123,6 +125,7 @@ export default function Login() {
       </>
     )
   }
+
   const loadView = () => {
     switch (step){ 
       case 2: return validateView()
