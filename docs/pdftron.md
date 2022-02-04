@@ -1,4 +1,4 @@
-visit the 
+visit the https://www.pdftron.com/documentation/web/get-started/nextjs/#3-place-webviewer-into-a-component
 
 Manually Import Into an Existing Project
 
@@ -13,7 +13,8 @@ Manually Import Into an Existing Project
 
 
 
-sample code
+# sample code
+```
 import {useEffect, useRef} from 'react';
 
 export default function HomePage() {
@@ -44,3 +45,4 @@ export default function HomePage() {
     );
   
 }
+```
