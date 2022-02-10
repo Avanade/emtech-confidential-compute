@@ -1,3 +1,4 @@
+import Link from "next/link";
 import IconType from "./IconType";
 
 interface Item {
@@ -40,7 +41,7 @@ const ListView = (props : Props) => {
                             <td className="py-1 align-middle">
                                 <IconType extension={extension} width={30} height={30} />
                             </td>
-                            <td className="py-1 align-middle">{name}</td>
+                            <td className="py-1 align-middle"><Link href="/viewdoc">{name}</Link></td>
                             <td className="py-1 align-middle">{`${('0' + creationDate.getMonth() + 1).slice(-2)}/${creationDate.getDate()}/${creationDate.getFullYear()}`}</td>
                             <td className="py-1 align-middle">{active ? 'YES' : 'NO'}</td>
                         </tr>

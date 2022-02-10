@@ -1,6 +1,7 @@
+import { IComment } from "@/lib/interface/document";
 import { NextPage } from "next";
 import Button from "./Button";
-import CommentItem, {IComment} from './CommentItem'
+import CommentItem from './CommentItem'
 
 
 const Comments:NextPage<{comments?:IComment[]}> = (context) => {
