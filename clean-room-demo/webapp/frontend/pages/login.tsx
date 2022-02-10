@@ -47,6 +47,20 @@ export default function Login() {
     console.log(v)
   }
 
+    // a function that makes a rest call to the backend
+
+    async function restCall() {
+      console.log('you pressed a button')
+      validate()
+      //do the rest call
+      
+
+      // if the rest call is successful go to scan step
+
+      // if not go to the error step
+
+    }
+
   const startView = () => {
     return (
       <>
@@ -60,11 +74,12 @@ export default function Login() {
               <Textbox value={password} errorMessage={passwordIsInvalid ? "Invalid Password" : ""} name="Password" type="password" onChange={(e) => setPassword(e.target.value)} PreIcon={KeyIcon}/>
             </div>
           </LoginPage.Main>
-          <LoginPage.Bottom><Button onClick={() => validate()} disabled={username ? false : true}>Login</Button></LoginPage.Bottom>
+          <LoginPage.Bottom><Button onClick={() => restCall()} disabled={username ? false : true}>Login</Button></LoginPage.Bottom>
         </LoginPage>
       </>
     )
   }
+
 
   const validateView = () => {
     return (
