@@ -52,12 +52,16 @@ export default function Login() {
     async function restCall() {
       console.log('you pressed a button')
       validate()
-      //do the rest call
-      
+      //do the rest call to get a truw or false
+      const result = false
 
       // if the rest call is successful go to scan step
-
-      // if not go to the error step
+      if (result === true)
+        scan()
+      else
+        // if the rest call is not successful go to error step
+        start()
+        setUsername("error")
 
     }
 
