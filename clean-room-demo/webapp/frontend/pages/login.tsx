@@ -54,6 +54,7 @@ export default function Login() {
       validate()
       //do the rest call to get a true or false
       const url_base = 'http://127.0.0.1:8000'
+      //TODO remove hard coded url_base
       const url_path = '/users/yubikey/'
       const url_full = url_base + url_path + email + '/' + otp
       const response = await fetch(url_full.toString())
