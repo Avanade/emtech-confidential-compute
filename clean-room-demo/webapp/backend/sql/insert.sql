@@ -10,7 +10,7 @@ VALUES
     1001,
     'Example User',
     'exampe.user@emailrovider.com',
-    '00000000-0000-0000-0000-000000000000'
+    'xxxxxxxxxxxx'
     )
 
 INSERT INTO

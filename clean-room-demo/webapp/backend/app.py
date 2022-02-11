@@ -31,11 +31,13 @@ sys.path.append("../annotations")
 sys.path.append("../documents")
 sys.path.append("../face")
 sys.path.append("../users")
+sys.path.append("../users")
 import notifications.notifications as notifications
 import annotations.annotations as an
 import documents.documents as documents
 import face.faceverification as face
 import users.users as users
+import yubikey.yubikey as yubi
 
 config = Config(".env")
 DEBUG = config("DEBUG", cast=bool, default=False)
@@ -159,6 +161,17 @@ async def get_annotation(request):
     return JSONResponse(annotation)
 
 
+def verify_user_yubi(request):
+    """check a user email against a registered key"""
+    user_mail = request.path_params["mail"]
+
+    otp = request.path_params["otp"]
+
+    verification = yubi.check_key_user_combo(user_mail, otp)
+
+    return JSONResponse(verification)
+
+
 async def error_template(request, exc):  # scan:ignore
     """Returns an error template."""
     error_codes = {
@@ -189,6 +202,7 @@ routes = [
     Route("/documents/list/{id}", list_documents_for_user, methods=["GET", "POST"]),
     Route("/face/verify", verify_faces, methods=["GET", "POST"]),
     Route("/users/verify/{id}", verify_user_id, methods=["GET", "POST"]),
+    Route("/users/yubikey/{mail}/{otp}", verify_user_yubi, methods=["GET", "POST"]),
     Route("/annotation/new/{id}", new_annotation, methods=["GET", "POST"]),
     Route("/annotation/list/{id}", list_annotations_for_doc, methods=["GET", "POST"]),
     Route("/annotation/get/{id}", get_annotation, methods=["GET", "POST"]),
