@@ -193,6 +193,8 @@ def get_user_from_yubi(key):
         f"SELECT * FROM [dbo].[Users] WHERE YubiKey = '{key}';"
     ).fetchall()
 
+    return result
+
 
 def validate_user_from_yubi(user_mail, key):
     """Get a named annotation by annotation ID"""
@@ -202,7 +204,7 @@ def validate_user_from_yubi(user_mail, key):
     metadata.reflect(bind=engine)
 
     result = engine.execute(
-        f"SELECT * FROM [dbo].[Users] WHERE YubiKey = '{key}' and UserEmail - '{user_mail}';"
+        f"SELECT * FROM [dbo].[Users] WHERE YubiKey = '{key}' and UserEmail = '{user_mail}';"
     ).fetchall()
 
     return result

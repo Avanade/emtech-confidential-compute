@@ -1,4 +1,4 @@
-# Deploy Condfidential COmpute Nodes to AKS
+# Deploy Condfidential Compute Nodes to AKS
 
 This tutorial is based off the Microsoft version found [here](https://docs.microsoft.com/en-us/azure/confidential-computing/confidential-nodes-aks-get-started).
 

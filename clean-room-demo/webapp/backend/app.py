@@ -17,6 +17,7 @@ from starlette.staticfiles import StaticFiles
 from starlette.routing import Route, Mount
 from starlette.templating import Jinja2Templates
 from starlette.middleware import Middleware
+from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.gzip import GZipMiddleware
 from starlette.config import Config
 import aiofiles
@@ -167,7 +168,7 @@ def verify_user_yubi(request):
 
     otp = request.path_params["otp"]
 
-    verification = yubi.check_key_user_combo(user_mail, otp)
+    verification = yubi.verify_email(user_mail, otp)
 
     return JSONResponse(verification)
 
@@ -208,12 +209,8 @@ routes = [
     Route("/annotation/get/{id}", get_annotation, methods=["GET", "POST"]),
 ]
 
-middleware = [
-    Middleware(GZipMiddleware, minimum_size=500),
-    Middleware(
-        uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware, trusted_hosts="*"
-    ),
-]
+middleware = [Middleware(CORSMiddleware, allow_origins=["*"])]
+
 
 exception_handlers = {404: error_template, 500: error_template}
 

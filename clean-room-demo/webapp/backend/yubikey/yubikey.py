@@ -5,7 +5,7 @@ import sys
 from yubico_client import Yubico
 
 sys.path.append("clean-room-demo/webapp/backend/sql")
-import sqlinteractions as si
+import sql.sqlinteractions as si
 
 
 def get_keys():
@@ -28,6 +28,8 @@ def verify(otp):
 
     if check_key_validity(otp) == True:
         return {"verification": "true"}
+    else:
+        return {"verification": "false"}
 
 
 def verify_email(user_mail, otp):
@@ -37,10 +39,12 @@ def verify_email(user_mail, otp):
     try:
         result = client.verify(str(otp))
     except:
-        return {"verification": "false"}
+        return {"verification": "invalid otp"}
 
     if check_key_user_combo(user_mail, otp) == True:
         return {"verification": "true"}
+    else:
+        return {"verification": "false"}
 
 
 def check_key_validity(otp):
@@ -69,4 +73,13 @@ def check_key_user_combo(user_mail, otp):
     return True
 
 
-print(verify("vvuvdvnhnnlktcrvivrrhcccudlnijeunhekucrbkeut"))
+# local debugging
+"""
+otp = "vvuvdvnhnnlkbdkjbeilecnkflbnegggnrbjrdvjcrbj"
+print(si.get_user_from_yubi(otp[0:12]))
+print(
+    verify_email(
+        "fergus.e.kidd@avanade.com", "vvuvdvnhnnlkgkflfbefjdedtvculbdunrukrkulikel"
+    )
+)
+"""
