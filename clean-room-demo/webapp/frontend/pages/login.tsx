@@ -47,6 +47,29 @@ export default function Login() {
     console.log(v)
   }
 
+    // a function that makes a rest call to the backend
+
+    async function restCall(email,otp) {
+      //go to the loading screen
+      validate()
+      //do the rest call to get a true or false
+      const url_base = 'http://127.0.0.1:8000'
+      //TODO remove hard coded url_base
+      const url_path = '/users/yubikey/'
+      const url_full = url_base + url_path + email + '/' + otp
+      const response = await fetch(url_full.toString())
+      const data = await response.json()
+
+      // if the rest call is successful go to scan step
+      if (data.verification == 'true')
+        scan()
+      else
+        // if the rest call is not successful go to error step
+        start()
+        setUsername("error")
+
+    }
+
   const startView = () => {
     return (
       <>
@@ -60,11 +83,12 @@ export default function Login() {
               <Textbox value={password} errorMessage={passwordIsInvalid ? "Invalid Password" : ""} name="Password" type="password" onChange={(e) => setPassword(e.target.value)} PreIcon={KeyIcon}/>
             </div>
           </LoginPage.Main>
-          <LoginPage.Bottom><Button onClick={() => validate()} disabled={username ? false : true}>Login</Button></LoginPage.Bottom>
+          <LoginPage.Bottom><Button onClick={() => restCall(username,password)} disabled={username ? false : true}>Login</Button></LoginPage.Bottom>
         </LoginPage>
       </>
     )
   }
+
 
   const validateView = () => {
     return (
