@@ -42,14 +42,15 @@ export default function Login() {
   }
   
 
-  const getImage = (v) => {
+  const getImage = (image64) => {
     // Image in base64
-    console.log(v)
+    console.log(image64)
+    faceVerification(image64)
   }
 
     // a function that makes a rest call to the backend
 
-  async function restCall(email, otp) {
+  async function yubikeyVerification(email, otp) {
     //go to the loading screen
     validate()
     //do the rest call to get a true or false
@@ -71,7 +72,33 @@ export default function Login() {
       start()
     }
 
+  }
+  
+  async function faceVerification(image) {
+    //go to the loading screen
+    validate()
+    //do the rest call to get a true or false
+    const url_base = 'http://127.0.0.1:8000'
+    //TODO remove hard coded url_base
+    const url_full = url_base + '/face/verify/'
+    const response = await fetch(url_full.toString())
+    const data = await response.json()
+
+    if (typeof data.verification === 'undefined') {
+      // the variable is undefined
+        console.log('verification not called correctly')
+        scan()
+      }
+
+    if (data.verification == 'true') {
+      scanSuccessful();
     }
+    // if the rest call is not successful go to error step
+    else {
+      scan()
+    }
+  
+  }
 
   const startView = () => {
     return (
@@ -86,7 +113,7 @@ export default function Login() {
               <Textbox value={password} errorMessage={passwordIsInvalid ? "Invalid Password" : ""} name="Password" type="password" onChange={(e) => setPassword(e.target.value)} PreIcon={KeyIcon}/>
             </div>
           </LoginPage.Main>
-          <LoginPage.Bottom><Button onClick={() => restCall(username,password)} disabled={username ? false : true}>Login</Button></LoginPage.Bottom>
+          <LoginPage.Bottom><Button onClick={() => yubikeyVerification(username,password)} disabled={username ? false : true}>Login</Button></LoginPage.Bottom>
         </LoginPage>
       </>
     )
@@ -146,7 +173,7 @@ export default function Login() {
               <Camera onCapture={getImage}></Camera>
             </div>
           </LoginPage.Main>
-          <LoginPage.Bottom><Button onClick={() => scanSuccessful() }>Continue</Button></LoginPage.Bottom>
+          <LoginPage.Bottom><Button onClick={() => getImage()}>Continue</Button></LoginPage.Bottom>
         </LoginPage>
       </>
     )
