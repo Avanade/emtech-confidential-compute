@@ -82,16 +82,26 @@ export default function Login() {
     const url_base = 'http://127.0.0.1:8000'
     //TODO remove hard coded url_base
     const url_full = url_base + '/face/verify/'
-    const response = await fetch(url_full.toString())
-    const data = await response.json()
 
-    if (typeof data.verification === 'undefined') {
+    const body = {
+      "image1": image.split(',')[1],
+      "image2": image.split(',')[1]
+    }
+
+    const response = await fetch(url_full.toString(), {body: JSON.stringify(body), method: 'POST'})
+    const data = await response.json()
+    const parsed_data = JSON.parse(data)
+
+    console.log(parsed_data.isIdentical)
+    console.log(parsed_data.confidence)
+
+    if (typeof parsed_data.isIdentical === 'undefined') {
       // the variable is undefined
         console.log('verification not called correctly')
         scan()
       }
 
-    if (data.verification == 'true') {
+    if (parsed_data.isIdentical == true) {
       scanSuccessful();
     }
     // if the rest call is not successful go to error step
