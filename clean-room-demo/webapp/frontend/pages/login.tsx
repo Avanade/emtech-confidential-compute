@@ -44,6 +44,7 @@ export default function Login() {
 
   const getImage = (image64) => {
     // Image in base64
+    console.log('image here')
     console.log(image64)
     faceVerification(image64)
   }
@@ -173,7 +174,7 @@ export default function Login() {
               <Camera onCapture={getImage}></Camera>
             </div>
           </LoginPage.Main>
-          <LoginPage.Bottom><Button onClick={() => getImage()}>Continue</Button></LoginPage.Bottom>
+          <LoginPage.Bottom></LoginPage.Bottom>
         </LoginPage>
       </>
     )
