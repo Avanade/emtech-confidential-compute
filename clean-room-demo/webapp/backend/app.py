@@ -100,7 +100,7 @@ async def verify_faces(request):
 
     # verify file
     if verify_json(body_data) == True:
-        response = face.verify_from_json(body_data)
+        response = face.verify_from_json_one_image(body_data)
     else:
         return JSONResponse(ERRORS["json_error"])
 

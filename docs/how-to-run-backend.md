@@ -1,22 +1,18 @@
-# HOW TO RUN THE FRONTEND APPLICATION
-This application is developed using NextJs
+# HOW TO RUN THE BACKEND APPLICATION LOCALLY
 
-## SYSTEM REQUIREMENTS
-NodeJs version 16.13.2 or above
+This application is developed using Python starlette
 
 ## Instructions
+
 On your terminal:
-1. Change directory to clean-room-demo\webapp\frontend
-    ```
-    cd clean-room-demo\webapp\frontend
-    ```
 
-1. Install NPM packages
-    ```
-    npm install
-    ```
+1. Change directory to clean-room-demo\webapp\backend
 
-1. Start the development mode.
-    ```
-    npm run dev
-    ```
+   ```
+   cd clean-room-demo\webapp\frontend
+   ```
+
+2. Start the development mode.
+   ```
+   ./dev-server-start.sh
+   ```

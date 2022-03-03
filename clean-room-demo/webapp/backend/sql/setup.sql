@@ -27,7 +27,6 @@ CREATE TABLE [Document_Store_Acess](
 CREATE TABLE [Document_List](
     DocumentID int NOT NULL,
     DocumentName varchar(255),
-    LedgerID int NOT NULL,
     Metadata varchar (255),
     DocumentStoreID int NOT NULL,
     PRIMARY KEY (DocumentID),
