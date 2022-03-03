@@ -81,11 +81,10 @@ export default function Login() {
     //do the rest call to get a true or false
     const url_base = 'http://127.0.0.1:8000'
     //TODO remove hard coded url_base
-    const url_full = url_base + '/face/verify/'
+    const url_full = url_base + '/face/verify'
 
     const body = {
-      "image1": image.split(',')[1],
-      "image2": image.split(',')[1]
+      "image": image.split(',')[1]
     }
 
     const response = await fetch(url_full.toString(), {body: JSON.stringify(body), method: 'POST'})
