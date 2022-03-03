@@ -10,9 +10,29 @@ interface Item {
     fileName : string;
     creationDate : Date;
     active : boolean;
+    
 }
 
+async function loadDocs() {
+
+    const url_base = 'http://127.0.0.1:8000'
+    //TODO remove hard coded url_base
+    const url_full = url_base + '/documents/list'
+
+    const response = await fetch(url_full.toString(), {method: 'POST'})
+    const data = await response.json()
+    const parsed_data = JSON.parse(data)
+
+    console.log('loading data')
+    console.log(parsed_data)
+}
+    
+
+
+
 export default function Document() {
+
+
     // SAMPLE DATA FOR LATEST DOCUMENTS
     const latestItems = [
         {id : 1, fileName : 'First.doc', creationDate : new Date(), active : false, },
@@ -21,27 +41,11 @@ export default function Document() {
 
     // SAMPLE DATA FOR DOCUMENTS
     const items = [
-        {id : 1, fileName : 'First.doc', creationDate : new Date(), active : false},
-        {id : 2, fileName : 'Second.xls', creationDate : new Date(), active : false},
-        {id : 3, fileName : 'Third.png', creationDate : new Date(), active : true},
-        {id : 4, fileName : 'Fourth.pdf', creationDate : new Date(), active : false},
-        {id : 5, fileName : 'Fifth.pdf', creationDate : new Date(), active : false},
-        {id : 6, fileName : 'Sixth.pdf', creationDate : new Date(), active : false},
-        {id : 7, fileName : 'Seventh.pptx', creationDate : new Date(), active : true},
-        {id : 8, fileName : 'Eigth.doc', creationDate : new Date(), active : false},
-        {id : 9, fileName : 'Ninth.xlsm', creationDate : new Date(), active : false},
-        {id : 10, fileName : 'Tenth.jpeg', creationDate : new Date(), active : false},
-        {id : 11, fileName : 'Eleventh.doc', creationDate : new Date(), active : false},
-        {id : 12, fileName : 'Twelfth.docx', creationDate : new Date(), active : true},
-        {id : 13, fileName : 'Thirteenth.pdf', creationDate : new Date(), active : false},
-        {id : 14, fileName : 'Fourteenth.png', creationDate : new Date(), active : false},
-        {id : 15, fileName : 'Fifthteenth.doc', creationDate : new Date(), active : false},
-        {id : 16, fileName : 'Sixteenth.pdf', creationDate : new Date(), active : true},
-        {id : 17, fileName : 'Seventeenth.pdf', creationDate : new Date(), active : false},
-        {id : 18, fileName : 'Eigteenth.pptx', creationDate : new Date(), active : false},
-        {id : 19, fileName : 'Nineteenth.png', creationDate : new Date(), active : false},
-        {id : 20, fileName : 'Twentieth.xlm', creationDate : new Date(), active : true}
+        {fileName : 'First.doc', creationDate : new Date(), active : false},
     ];
+
+    //console.log(docData)
+    console.log(items)
 
     const [selectedId, setSelectedId] = useState<number>(0);
     const [selectedView, setSelectedView] = useState<'Icon' | 'List'>('Icon');

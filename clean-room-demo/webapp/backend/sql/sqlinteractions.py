@@ -111,7 +111,7 @@ def list_documents():
     # dd/mm/YY H:M:S
     time_stamp = now.strftime("%Y-%m-%d %H:%M:%S")
 
-    result = engine.execute(f"SELECT * FROM [dbo].[Document_Store]").fetchall()
+    result = engine.execute(f"SELECT * FROM [dbo].[Document_List]").fetchall()
 
     return result
 
