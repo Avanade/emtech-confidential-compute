@@ -26,3 +26,9 @@ On your terminal:
    ```
    npm run dev
    ```
+
+## Output
+
+Sample frontend application:
+
+![](docs/images/FrontendImages.png)
