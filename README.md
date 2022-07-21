@@ -2,7 +2,6 @@
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) ![GitHub issues](https://img.shields.io/github/issues/Avanade/emtech-confidential-compute) ![GitHub](https://img.shields.io/github/license/Avanade/emtech-confidential-compute) ![GitHub Repo stars](https://img.shields.io/github/stars/Avanade/emtech-confidential-compute?style=social)
 
-
 ## Overview
 
 This repository showcases Avanade's exploration with Confidential Computing on Azure, built around a document annotation scenario.
@@ -13,8 +12,15 @@ emtech-confidential-compute is available under the [MIT Licence](./LICENCE).
 
 ### Solutions Referenced
 
+- [Azure COnfidential Ledger](https://azure.microsoft.com/en-us/services/azure-confidential-ledger/)
 - [Confidential computing nodes on Azure Kubernetes service](https://docs.microsoft.com/en-us/azure/confidential-computing/confidential-nodes-aks-overview?WT.mc_id=AI-MVP-5004204)
 - [Azure Form Recognizer](https://docs.microsoft.com/en-us/azure/applied-ai-services/form-recognizer/?WT.mc_id=AI-MVP-5004204)
+
+### Architecure
+
+A high level Architecture of the proposed solution
+
+![](docs/images/CC-2.png)
 
 ### Documentation
 
